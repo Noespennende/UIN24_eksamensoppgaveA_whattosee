@@ -12,7 +12,8 @@ function App() {
     <>
       <Routes>
         <Route index element ={<Loginpage />}></Route>
-        
+        <Route path='/Frontpage'/>
+        <Route path='Dashboard'/>
       </Routes>
         
     </>
