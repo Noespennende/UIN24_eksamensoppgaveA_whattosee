@@ -30,7 +30,7 @@ function App() {
         <Route index element ={<Loginpage onLogin={handleLogin}/>}></Route>
         <Route path='/Frontpage'/>
         <Route path='/Dashboard/:slug' element={<Dashboard/>}/>
-        <Route path="/Dashboard/:slug" element={<Midlertidigdash onLogout={handleLogout} />} />
+        
         <Route path='/genre'/>
         <Route path='/:slug/genre'/>
       </Routes>

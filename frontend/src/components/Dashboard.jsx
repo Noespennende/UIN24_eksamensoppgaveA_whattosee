@@ -20,7 +20,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         getWishlistMovies(slug)
-        console.log("Test: ", wishlist)
+        //console.log("User movie wishlist: ", wishlist)
     }, [slug])
 
 
@@ -39,10 +39,12 @@ export default function Dashboard() {
             }
         }
 
-        setCommonWishlist(commonWishes)
-        console.log("user1 list: ", user1Wishlist)
-        console.log("user2 list: ", user2Wishlist)
-        console.log("common list:", commonWishes)
+        
+        //setCommonWishlist(commonWishes.map(movie => movie.imdbid));
+        setCommonWishlist(commonWishes);
+        //console.log("user1 list: ", user1Wishlist)
+        //console.log("user2 list: ", user2Wishlist)
+        //console.log("common list:", commonWishes)
     }
 
     useEffect(() => {
@@ -57,7 +59,8 @@ export default function Dashboard() {
             <h1>Forslag for Bruker1 og Bruker2</h1>
             <section>
                 <h2>Catch up!</h2>
-                <MovieCard/>
+                {commonWishlist?.map((movie, index) => 
+                <MovieCard key={index} imdbid={movie.imdbid} />)}
             </section>
             <section>
                 <h2>Go safe!</h2>

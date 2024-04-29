@@ -1,6 +1,14 @@
-export default function MovieCard() {
-    
+import { Link } from "react-router-dom";
+
+export default function Moviecard({imdbid}) {
     return (
-        <h3>(Movie)</h3>
+        <article>
+            <Link to="">
+                <img src="" alt="" ></img>
+                <h3>Filmtittel</h3>
+            </Link>
+            <p>{imdbid}</p>
+        </article>
+        
     )
 }

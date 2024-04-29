@@ -1,7 +1,7 @@
-import { client } from "../test"
+import { client } from "../client"
 
 export async function fetchWishlistMoviesByUser(username){
-    const data = await client.fetch(`*[_type == "users" && username == $usern]{
+    const data = await client.fetch(`*[_type == "users" && username == $username]{
         wishlist[]->{
             imdbid
         }
