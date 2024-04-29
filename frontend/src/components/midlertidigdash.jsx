@@ -11,8 +11,6 @@ export default function Midlertidigdash( { onLogout } ) {
     }
     return (
         <>
-            <NavBar />
-            <h1>dashboard</h1>
             <Link to="/"><button onClick={handlelogout}>logout</button></Link>
             <h2>hællæ på dæ {loggedInUser}</h2>
         </>

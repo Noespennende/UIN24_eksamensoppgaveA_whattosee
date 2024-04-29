@@ -4,6 +4,7 @@ import './App.css'
 import Midlertidigdash from './components/midlertidigdash'
 import Dashboard from './components/Dashboard'
 import { useEffect, useState } from 'react'
+import Layout from './components/Layout'
 
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
     setIsLoggedIn(false);
   };
   return (
-    <>
+    <Layout>
       <Routes>
         <Route index element ={<Loginpage onLogin={handleLogin}/>}></Route>
         <Route path='/Frontpage'/>
@@ -34,7 +35,7 @@ function App() {
         <Route path='/genre'/>
         <Route path='/:slug/genre'/>
       </Routes>
-    </>
+    </Layout>
   )
 }
 
