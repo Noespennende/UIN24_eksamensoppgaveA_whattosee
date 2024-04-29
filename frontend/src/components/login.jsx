@@ -17,13 +17,15 @@ export default function Loginpage(){
 
     return (
         <>
-       <ul>
+        <ul>
             <li><Link to="/Dashboard/">Dashboard</Link></li>
             <li><Link to="/Frontpage">Frontpage</Link></li>
             <li><Link to="/genre">Genre</Link></li>
             <li><Link to="/user/genre">User Genre</Link></li>
         </ul>
+        <h1>Hvem skal se idag?</h1>
         <ul>
+            <p>Velg Bruker</p>
             {users.map((user, index) => (
                 <Link to={`/Dashboard/${user.username}`} key={index}><button>{user.username}</button></Link>
             ))}

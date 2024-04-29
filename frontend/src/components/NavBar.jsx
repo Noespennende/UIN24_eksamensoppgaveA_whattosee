@@ -1,11 +1,12 @@
-export default function NavBar(){
+import "../styles.css"
 
+export default function NavBar(){
 
     return(
         <>
             <header>
-                <h2>What to see</h2>
                 <nav>
+                <h2>What to see</h2>
                     <ul>
                         <li>Hva skal jeg se?</li>
                         <li>Bla igjennom sjangere</li>
