@@ -11,8 +11,13 @@ export const brukere = {
         {
             title: "Ønskeliste",
             name: "wishlist",
-            type: "reference",
-            to: [{type: "movies"}]
+            type: "array",
+            of: [
+            {
+                type: 'reference',
+                to: [{type: "movies"}]
+            }
+                ]
         },
  
     ]
