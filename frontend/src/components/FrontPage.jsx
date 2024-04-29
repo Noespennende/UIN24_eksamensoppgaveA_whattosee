@@ -15,8 +15,6 @@ export default function FrontPage() {
             <Link to="/"><button>logout</button></Link>
             <section id="skal_se">
                 <h3>Filmer jeg skal se!</h3>
-            </section>
-            <section id="film_ønskeliste">
                 <p>Disse filmene ligger i ønskelisten din:</p>
             </section>
             <article id="se_med">
