@@ -3,18 +3,23 @@ import { fetchUsers } from "../../sanity/services/loginServices";
 import { useEffect, useState } from "react";
 
 
-export default function Loginpage(){
+export default function Loginpage({ onLogin }){
     const [users, setUsers] = useState([])
 
     useEffect(()=>{
-        const getUsers = async () => {
+        const fetchData = async () => {
             const oneUser = await fetchUsers();
-            setUsers(oneUser)
+            setUsers(oneUser);
         }
-        getUsers()
+        fetchData();
     }, [])
 
-
+    const handleLogin =(username) =>{
+        onLogin(username)
+    }
+    
+    
+    
     return (
         <>
         <ul>
@@ -27,9 +32,10 @@ export default function Loginpage(){
         <ul>
             <p>Velg Bruker</p>
             {users.map((user, index) => (
-                <Link to={`/Dashboard/${user.username}`} key={index}><button>{user.username}</button></Link>
+                <Link to={`/Dashboard/${user.username}`} key={index}><button onClick={() => handleLogin(user.username)}>{user.username}</button></Link>
             ))}
         </ul>
+        
         </>
     )
 }

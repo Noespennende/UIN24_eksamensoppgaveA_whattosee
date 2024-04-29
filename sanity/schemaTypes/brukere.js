@@ -19,6 +19,28 @@ export const brukere = {
             }
                 ]
         },
+        {
+            title: "Favorittfilmer",
+            name: "favoriteMovies",
+            type: "array",
+            of: [
+            {
+                type: 'reference',
+                to: [{type: "movies"}]
+            }
+                ]
+        },
+        {
+            title: "Favorittsjangre",
+            name: "favoriteGenres",
+            type: "array",
+            of: [
+            {
+                type: 'reference',
+                to: [{type: "genres"}]
+            }
+                ]
+        },
  
     ]
 }
