@@ -13,7 +13,9 @@ function App() {
       <Routes>
         <Route index element ={<Loginpage />}></Route>
         <Route path='/Frontpage'/>
-        <Route path='Dashboard'/>
+        <Route path='/Dashboard'/>
+        <Route path='/genre'/>
+        <Route path='/user/genre'/>
       </Routes>
         
     </>
