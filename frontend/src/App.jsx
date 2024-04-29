@@ -8,7 +8,6 @@ import Genres from './components/Genres'
 
 function App() {
 
-
   return (
     <>
       <Routes>
