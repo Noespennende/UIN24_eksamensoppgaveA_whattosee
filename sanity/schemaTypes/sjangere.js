@@ -7,6 +7,11 @@ export const sjangere = {
             title: "sjangertittel",
             name: "genretitle",
             type: "string"
+        },
+        {
+            title: "imdbid",
+            name: "imdbid",
+            type: "string"
         }
     ]
 }
