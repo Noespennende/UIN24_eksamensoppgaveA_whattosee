@@ -1,19 +1,27 @@
 import Moviecard from "./MovieCard"
 import { useState } from "react"
 import { useEffect } from "react"
-import { fetchByImdbId } from "../../imdbapi/services/imdbServices"
+import {apiClient} from "../../imdbapi/apiClient"
 
 
 export default function Genre(){
     const [genreList, setGenreList] = useState()
     const [film, setFilm] = useState()
+    const imdbID = "tt0086250"
 
-    const getImdbTitle = async() => {
-        fetchByImdbId("", setFilm)
+    const getFilmData = async(imdbID) => {
+        const url = `https://moviesdatabase.p.rapidapi.com/titles/${imdbID}`;
+        try {
+            const response = await fetch(url, apiClient);
+            const result = await response.text();
+            console.log(result);
+        } catch (error) {
+            console.error(error);
         }
+    }
     
         useEffect(() => {
-            getImdbTitle()
+            getFilmData(imdbID)
             console.log(film)
         },[])
 
