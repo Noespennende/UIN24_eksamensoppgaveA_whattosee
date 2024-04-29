@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { fetchWishlistMoviesByUser } from "../../sanity/services/userServices";
-import MovieCard from "./MovieCard";
 import { useEffect, useState } from "react";
+import DashMovieCard from "./DashMovieCard"
 
 export default function Dashboard() {
 
@@ -39,8 +39,6 @@ export default function Dashboard() {
             }
         }
 
-        
-        //setCommonWishlist(commonWishes.map(movie => movie.imdbid));
         setCommonWishlist(commonWishes);
         //console.log("user1 list: ", user1Wishlist)
         //console.log("user2 list: ", user2Wishlist)
@@ -51,8 +49,6 @@ export default function Dashboard() {
         getCommonWishlistMoviesForUsers(bruker1, bruker2)
     }, [slug])
 
-    
-
 
     return(
         <main>
@@ -60,15 +56,15 @@ export default function Dashboard() {
             <section>
                 <h2>Catch up!</h2>
                 {commonWishlist?.map((movie, index) => 
-                <MovieCard key={index} imdbid={movie.imdbid} />)}
+                <DashMovieCard key={index} imdbId={movie.imdbid} />)}
             </section>
             <section>
                 <h2>Go safe!</h2>
-                <MovieCard/>
+                <DashMovieCard/>
             </section>
             <section>
                 <h2>Utforsk!</h2>
-                <MovieCard/>
+                <DashMovieCard/>
             </section>
         </main>
         

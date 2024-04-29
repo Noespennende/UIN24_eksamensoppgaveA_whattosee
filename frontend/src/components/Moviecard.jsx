@@ -7,7 +7,6 @@ export default function MovieCard({title, image, imageText, imdbId}) {
                 <img src={image} alt={imageText} ></img>
                 <h3>{title}</h3>
             </Link>
-            <p>{imdbid}</p>
         </article>
         
     )
