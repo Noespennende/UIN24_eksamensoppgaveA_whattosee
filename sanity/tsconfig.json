@@ -12,6 +12,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "schemaTypes/index.js"],
   "exclude": ["node_modules"]
 }
