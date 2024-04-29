@@ -1,11 +1,16 @@
 import { client } from "../test"
 
-export async function fetchWishlistMoviesByUser(slug){
-    const data = await client.fetch(`*[_type == "users" && username == $slug]{
-        username,
-        "wishlistMovies": wishlist->{
+export async function fetchWishlistMoviesByUser(username){
+    const data = await client.fetch(`*[_type == "users" && username == $usern]{
+        wishlist[]->{
             imdbid
         }
-    }`, {slug : slug})
-     return data
+    }`, {username : username})
+     return data[0]
 }
+
+/*
+export async function fetchCommonWishlistMoviesForUsers(user1Wishlist, user2Wishlist){
+    // prøver fortsatt slå sammen spørringer .. 🤓
+}
+*/
