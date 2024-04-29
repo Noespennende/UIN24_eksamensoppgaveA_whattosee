@@ -12,13 +12,13 @@ function App() {
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('LoggedInUser')
-    if(loggedInUser)
+    if (loggedInUser)
       setIsLoggedIn(true)
-  },[])
+  }, [])
 
   //https://www.freecodecamp.org/news/how-to-use-localstorage-with-react-hooks-to-set-and-get-items/ 29/4/24
-  const handleLogin = (username) =>{
-    localStorage.setItem('LoggedInUser',  JSON.stringify(username));
+  const handleLogin = (username) => {
+    localStorage.setItem('LoggedInUser', JSON.stringify(username));
     setIsLoggedIn(true)
   }
   const handleLogout = () => {
@@ -28,12 +28,12 @@ function App() {
   return (
     <Layout>
       <Routes>
-        <Route index element ={<Loginpage onLogin={handleLogin}/>}></Route>
-        <Route path='/Frontpage'/>
-        <Route path='/Dashboard/:slug' element={<Dashboard/>}/>
-        
-        <Route path='/genre'/>
-        <Route path='/:slug/genre'/>
+        <Route index element={<Loginpage onLogin={handleLogin} />}></Route>
+        <Route path='/Frontpage' />
+        <Route path='/Dashboard/:slug' element={<Dashboard />} />
+
+        <Route path='/genre' />
+        <Route path='/:slug/genre' />
       </Routes>
     </Layout>
   )
