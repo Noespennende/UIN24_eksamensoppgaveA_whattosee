@@ -12,6 +12,12 @@ export const filmer = {
             title: "imdbid",
             name: "imdbid",
             type: "string"
+        },
+        {
+            title: "sjanger",
+            name: "genre",
+            type: "reference",
+            to: [{type: "genres"}]
         }
     ]
 }
