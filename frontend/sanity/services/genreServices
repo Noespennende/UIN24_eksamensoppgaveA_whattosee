@@ -1,0 +1,10 @@
+import { client } from "../test"
+
+export async function fetchAllGenres(){
+    const data = await client.fetch(`*[_type == "genre"]{
+        genretitle,
+        imdbid,
+        genreurl
+    }`)
+     return data
+}

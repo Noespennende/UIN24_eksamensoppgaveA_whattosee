@@ -5,6 +5,7 @@ import FrontPage from './components/FrontPage'
 import Dashboard from './components/Dashboard'
 import { useEffect, useState } from 'react'
 import Layout from './components/Layout'
+import Genre from './components/Genre'
 
 
 function App() {
@@ -32,8 +33,8 @@ function App() {
         <Route path='/Frontpage/:slug' element={<FrontPage onLogout={handleLogout} />} />
         <Route path='/Dashboard/:slug' element={<Dashboard />} /> {/* fjerne slug her når sammenligning av brukere i FrontPage er lagd?*/}
 
-        <Route path='/genre' />
-        <Route path='/:slug/genre' />
+        <Route path='/genre' element={<Genre/>}/>
+        <Route path='/:slug/genre' element={<Genre/>}/>
       </Routes>
     </Layout>
   )
