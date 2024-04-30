@@ -32,7 +32,7 @@ export default function Loginpage({ onLogin }) {
             <ul>
                 <p>Velg Bruker</p>
                 {users.map((user, index) => (
-                    <Link to={`/Dashboard/${user.username}`} key={index}><button onClick={() => handleLogin(user.username)}>{user.username}</button></Link>
+                    <Link to={`/Frontpage/${user.username}`} key={index}><button onClick={() => handleLogin(user.username)}>{user.username}</button></Link>
                 ))}
             </ul>
 
