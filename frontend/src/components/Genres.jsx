@@ -4,16 +4,19 @@ import { fetchAllGenres } from "../../sanity/services/genreServices";
 import GenreCard from "./GenreCard";
 import { fetchAllMovies } from "../../sanity/services/movieServices";
 import { fetchLoggedInUser } from "../../sanity/services/loginServices";
+import { fetchFavoriteGenreByUser } from "../../sanity/services/userServices";
 
 export default function Genres(){
     const [genreList, setGenreList] = useState([])
     const [userGenres, setUserGenres] = useState([])
+    const loggedInUser = JSON.parse(localStorage.getItem('LoggedInUser'))
 
     const getGenreData = async () => {
+        const userData = await fetchFavoriteGenreByUser(loggedInUser)
         const genreData = await fetchAllGenres()
-        const userData = await fetchLoggedInUser()
-        console.log(userData)
         setGenreList(genreData)
+        setUserGenres(userData[0].favorites)
+
     }
 
     useEffect(() => {
@@ -24,7 +27,7 @@ export default function Genres(){
         <main>
             <h1>Sjangere</h1>
             <ul>
-                {genreList?.map((genre, index) => <li key={"genre"+index}><GenreCard title={genre.genretitle} url={genre.url}/></li>)}
+                {genreList?.map((genre, index) => <li key={"genre"+index}><GenreCard title={genre.genretitle} url={genre.url} userGenres={userGenres}/></li>)}
             </ul>
         </main>
     )

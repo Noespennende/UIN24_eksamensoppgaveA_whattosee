@@ -6,6 +6,5 @@ export async function fetchAllGenres(){
         imdbid,
         "url": genreurl.current
     }`)
-    console.log(data)
      return data
 }
