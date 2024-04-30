@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 export default function MovieCard({title, image, imageText, imdbId}) {
+    
     return (
         <article>
             <Link to={`https://www.imdb.com/title/${imdbId}`}>

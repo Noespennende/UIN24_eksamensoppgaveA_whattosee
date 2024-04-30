@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import Loginpage from './components/login'
 import './App.css'
-import Midlertidigdash from './components/midlertidigdash'
+import FrontPage from './components/FrontPage'
 import Dashboard from './components/Dashboard'
 import { useEffect, useState } from 'react'
 import Layout from './components/Layout'
@@ -12,13 +12,13 @@ function App() {
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('LoggedInUser')
-    if(loggedInUser)
+    if (loggedInUser)
       setIsLoggedIn(true)
-  },[])
+  }, [])
 
   //https://www.freecodecamp.org/news/how-to-use-localstorage-with-react-hooks-to-set-and-get-items/ 29/4/24
-  const handleLogin = (username) =>{
-    localStorage.setItem('LoggedInUser',  JSON.stringify(username));
+  const handleLogin = (username) => {
+    localStorage.setItem('LoggedInUser', JSON.stringify(username));
     setIsLoggedIn(true)
   }
   const handleLogout = () => {
@@ -28,12 +28,12 @@ function App() {
   return (
     <Layout>
       <Routes>
-        <Route index element ={<Loginpage onLogin={handleLogin}/>}></Route>
-        <Route path='/Frontpage'/>
-        <Route path='/Dashboard/:slug' element={<Dashboard/>}/>
-        
-        <Route path='/genre'/>
-        <Route path='/:slug/genre'/>
+        <Route index element={<Loginpage onLogin={handleLogin} />}></Route>
+        <Route path='/Frontpage/:slug' element={<FrontPage />} />
+        <Route path='/Dashboard/:slug' element={<Dashboard />} /> {/* fjerne slug her når sammenligning av brukere i FrontPage er lagd?*/}
+
+        <Route path='/genre' />
+        <Route path='/:slug/genre' />
       </Routes>
     </Layout>
   )
