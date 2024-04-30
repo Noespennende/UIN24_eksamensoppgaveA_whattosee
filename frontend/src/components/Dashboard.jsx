@@ -3,8 +3,10 @@ import { fetchWishlistMoviesByUser } from "../../sanity/services/userServices";
 import { useEffect, useState } from "react";
 import DashMovieCard from "./DashMovieCard"
 import { fetchUsers } from "../../sanity/services/loginServices";
+import { apiClient } from "../../imdbapi/apiClient";
 
 export default function Dashboard( {onLogout}) {
+    
     const[users,setUsers] = useState([])
     const loggedInUser = JSON.parse(localStorage.getItem('LoggedInUser'))
 
@@ -22,44 +24,72 @@ export default function Dashboard( {onLogout}) {
     const bruker1 = "Olaf"
     const bruker2 = "Hilde"
 
-    const[wishlist, setWishlist] = useState()
-    const [commonWishlist, setCommonWishlist] = useState()
+    const [commonWishlist, setCommonWishlist] = useState([])
+    const [commonWishlistData, setCommonWishlistData] = useState([])
 
-    const getWishlistMovies = async (slug) => {
-        const movies = await fetchWishlistMoviesByUser(slug);
+
+    const getOneUserWishlistMovies = async (slug) => {
+        const movies = await fetchWishlistMoviesByUser(slug)
         setWishlist(movies)
     }
 
     useEffect(() => {
-        getWishlistMovies(slug)
-        //console.log("User movie wishlist: ", wishlist)
+        getOneUserWishlistMovies(slug)
     }, [slug])
 
 
-    // Filmer to brukere har felles på ønskeliste
+    // Sanity fetch -> setter commonWishlist -> alle filmer som to brukere har til felles
     const getCommonWishlistMoviesForUsers = async (user1, user2) => {
-        const user1Wishlist = await fetchWishlistMoviesByUser(user1);
-        const user2Wishlist = await fetchWishlistMoviesByUser(user2);
-        const commonWishes = [];
+        const user1Wishlist = await fetchWishlistMoviesByUser(user1)
+        const user2Wishlist = await fetchWishlistMoviesByUser(user2)
+
+        const commonWishlistData = []
 
         for (const user1movie of user1Wishlist.wishlist) {
             for (const user2movie of user2Wishlist.wishlist) {
                 if (user1movie.imdbid === user2movie.imdbid) {
-                    commonWishes.push(user1movie);
-                    break; 
+                    commonWishlistData.push(user1movie)
+                    break
                 }
             }
         }
 
-        setCommonWishlist(commonWishes);
-        //console.log("user1 list: ", user1Wishlist)
-        //console.log("user2 list: ", user2Wishlist)
-        //console.log("common list:", commonWishes)
+        setCommonWishlist(commonWishlistData);
     }
 
+    // Tar i bruk metoden getCommonWishlistMoviesForUsers()
     useEffect(() => {
         getCommonWishlistMoviesForUsers(bruker1, bruker2)
     }, [slug])
+
+    // Henter api-data for én film basert på imdbID
+    const getMovieData = async(imdbID) => {
+        const url = `https://moviesdatabase.p.rapidapi.com/titles/${imdbID}`
+        return await fetch(url, apiClient)
+        .then(response => response.json())
+        .catch(error => console.error(error))
+    }
+
+    // Henter api-data for alle filmer i "moviesList"
+    const getMoviesData = async (moviesList) => {
+        const moviesData = []
+        for (const movie of moviesList) {
+            const movieData = await getMovieData(movie.imdbid); 
+            moviesData.push(movieData)
+        }
+        return moviesData
+        
+    }
+
+    // Tar i bruk funksjonen getMoviesData() for å hente alle filmer, og bruker "felles" listen
+    useEffect(() => {
+        getMoviesData(commonWishlist)
+        .then(data => {
+            setCommonWishlistData(data)
+            console.log(data)
+        })
+    }, [commonWishlist])
+
 
     
     
