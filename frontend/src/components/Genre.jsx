@@ -1,4 +1,4 @@
-import Moviecard from "./MovieCard"
+import MovieCard from "./MovieCard"
 import { useState } from "react"
 import { useEffect } from "react"
 import {apiClient} from "../../imdbapi/apiClient"
@@ -28,7 +28,7 @@ export default function Genre(){
     return(
         <main>
             <h1>Sjanger: Sjangernavn (x filmer)</h1>
-            <Moviecard/>
+            <MovieCard/>
         </main>
     )
 
