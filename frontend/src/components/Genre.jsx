@@ -1,4 +1,4 @@
-import MovieCard from "./MovieCard"
+import MovieCard from "./Moviecard"
 import { useState } from "react"
 import { useEffect} from "react"
 import { useParams } from "react-router-dom"
@@ -7,14 +7,12 @@ import { fetchAllMovies, fetchMoviesByGenre } from "../../sanity/services/movieS
 
 
 export default function Genre(){
-    const [movieList, setMovieList] = useState()
+    const [movieList, setMovieList] = useState([])
     const {slug} = useParams()
-    let movieCount = 0
 
     const getMovieData = async (slug) => {
         const sanityData = await fetchMoviesByGenre(slug)
         setMovieList(sanityData)
-        
     }
         useEffect(() => {
             getMovieData(slug)
@@ -22,7 +20,7 @@ export default function Genre(){
 
     return(
         <main>
-            <h1>Sjanger: {slug} ({movieList?.size} filmer)</h1>
+            <h1>Sjanger: {slug} ({movieList.length} filmer)</h1>
             <ul>
                 {movieList?.map((movie, index) => <li key={"movie"+index}><MovieCard title={movie.movietitle} imdbId={movie.imdbid}/></li>)}
             </ul>
