@@ -1,4 +1,4 @@
-import { client } from "../test"
+import { client } from "../client"
 
 export async function fetchAllGenres(){
     const data = await client.fetch(`*[_type == "genre"]{
