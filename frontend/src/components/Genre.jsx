@@ -13,8 +13,8 @@ export default function Genre(){
         const url = `https://moviesdatabase.p.rapidapi.com/titles/${imdbID}`;
         try {
             const response = await fetch(url, apiClient);
-            const result = await response.text();
-            console.log(result);
+            const result = await response.json();
+            console.log(result.results);
         } catch (error) {
             console.error(error);
         }
