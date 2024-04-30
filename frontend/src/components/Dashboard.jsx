@@ -1,9 +1,21 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { fetchWishlistMoviesByUser } from "../../sanity/services/userServices";
 import { useEffect, useState } from "react";
 import DashMovieCard from "./DashMovieCard"
+import { fetchUsers } from "../../sanity/services/loginServices";
 
-export default function Dashboard() {
+export default function Dashboard( {onLogout}) {
+    const[users,setUsers] = useState([])
+    const loggedInUser = JSON.parse(localStorage.getItem('LoggedInUser'))
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const allUsers = await fetchUsers();
+            const usersFiltered = allUsers.filter(user => user.username !== loggedInUser)
+            setUsers(usersFiltered)   
+        }
+        fetchData();
+    }, [loggedInUser])
 
     const {slug} = useParams()
 
@@ -49,10 +61,17 @@ export default function Dashboard() {
         getCommonWishlistMoviesForUsers(bruker1, bruker2)
     }, [slug])
 
+    
+    
+    const handlelogout =() =>{
+        onLogout()
+    }
 
     return(
         <main>
-            <h1>Forslag for Bruker1 og Bruker2</h1>
+            {users.map((user, index) => (
+            <h1 key={index}>Forslag til {user.username}</h1>))}
+            <h3>Forslag for Bruker1 og Bruker2</h3>
             <section>
                 <h2>Catch up!</h2>
                 {commonWishlist?.map((movie, index) => 
@@ -66,6 +85,8 @@ export default function Dashboard() {
                 <h2>Utforsk!</h2>
                 <DashMovieCard/>
             </section>
+            <Link to="/"><button onClick={handlelogout}>logout</button></Link>
+            <h2>hællæ på dæ {loggedInUser}</h2>
         </main>
         
     )
