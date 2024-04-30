@@ -4,8 +4,9 @@ export async function fetchAllMovies(){
     const data = await client.fetch(`*[_type == "movies"]{
         movietitle,
         imdbid,
-        "genre": movie->genre
+        "genre": genre->genretitle
     }`)
+    console.log(data)
      return data
 }
 

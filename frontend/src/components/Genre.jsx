@@ -1,9 +1,8 @@
-import MovieCard from "./Moviecard"
+import MovieCard from "./MovieCard"
 import { useState } from "react"
 import { useEffect} from "react"
 import { useParams } from "react-router-dom"
-import {apiClient} from "../../imdbapi/apiClient"
-import { fetchAllMovies, fetchMoviesByGenre } from "../../sanity/services/movieServices"
+import { fetchMoviesByGenre } from "../../sanity/services/movieServices"
 
 
 export default function Genre(){
@@ -16,11 +15,12 @@ export default function Genre(){
     }
         useEffect(() => {
             getMovieData(slug)
+            
         },[slug])
 
     return(
         <main>
-            <h1>Sjanger: {slug} ({movieList.length} filmer)</h1>
+            <h1>Sjanger: {slug?.charAt(0).toUpperCase()+ slug?.slice(1)} ({movieList?.length} filmer)</h1>
             <ul>
                 {movieList?.map((movie, index) => <li key={"movie"+index}><MovieCard title={movie.movietitle} imdbId={movie.imdbid}/></li>)}
             </ul>
