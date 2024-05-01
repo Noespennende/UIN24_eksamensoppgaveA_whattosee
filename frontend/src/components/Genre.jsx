@@ -1,34 +1,29 @@
 import MovieCard from "./MovieCard"
 import { useState } from "react"
-import { useEffect } from "react"
-import {apiClient} from "../../imdbapi/apiClient"
+import { useEffect} from "react"
+import { useParams } from "react-router-dom"
+import { fetchMoviesByGenre } from "../../sanity/services/movieServices"
 
 
 export default function Genre(){
-    const [genreList, setGenreList] = useState()
-    const [film, setFilm] = useState()
-    const imdbID = "tt0086250"
+    const [movieList, setMovieList] = useState([])
+    const {slug} = useParams()
 
-    const getFilmData = async(imdbID) => {
-        const url = `https://moviesdatabase.p.rapidapi.com/titles/${imdbID}`;
-        try {
-            const response = await fetch(url, apiClient);
-            const result = await response.text();
-            console.log(result);
-        } catch (error) {
-            console.error(error);
-        }
+    const getMovieData = async (slug) => {
+        const sanityData = await fetchMoviesByGenre(slug)
+        setMovieList(sanityData)
     }
-    
         useEffect(() => {
-            getFilmData(imdbID)
-            console.log(film)
-        },[])
+            getMovieData(slug)
+            
+        },[slug])
 
     return(
         <main>
-            <h1>Sjanger: Sjangernavn (x filmer)</h1>
-            <MovieCard/>
+            <h1>Sjanger: {slug?.charAt(0).toUpperCase()+ slug?.slice(1)} ({movieList?.length} filmer)</h1>
+            <ul>
+                {movieList?.map((movie, index) => <li key={"movie"+index}><MovieCard title={movie.movietitle} imdbId={movie.imdbid}/></li>)}
+            </ul>
         </main>
     )
 
