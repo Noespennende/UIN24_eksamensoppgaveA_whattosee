@@ -26,6 +26,82 @@ export default function Dashboard( {onLogout}) {
         fetchData();
     }, [loggedInUser])
 
+    const [moviesInWishAndFav, setMoviesInWishAndFav] = useState([])
+    const [commonData, setCommonData] = useState([])
+    const [person, setPerson] = useState([])
+    const [commonDat, setCommonDat] = useState([])
+    
+    useEffect(() => {
+        getMoviesData(moviesInWishAndFav)
+        .then(data => {
+            setCommonData(data)
+            //console.log("test", data)
+            //console.log("halloo", moviesInWishAndFav);
+        })
+    }, [moviesInWishAndFav])
+    
+
+    useEffect(() => {
+        getMoviesData(person)
+        .then(data => {
+            setCommonDat(data)
+            //console.log("test", data)
+            console.log("halloo kommondatt", person);
+        })
+    }, [person])
+
+    const getCommonMoviesFromWishAndFav = async (user1, user2) => {
+        const user1Wish = await fetchWishlistMoviesByUser(user1)
+        const user2Fav = await fetchFavoriteMoviesByUser(user2)
+        const user1Fav = await fetchFavoriteMoviesByUser(user1)
+        const user2Wish = await fetchWishlistMoviesByUser(user2)
+
+        const imdbList = []
+        const personList = []
+
+        for(const user1movie of user1Wish.wishlist){
+            for(const user2movie of user2Fav.favoriteMovies){
+                //console.log("user1 ", user1movie.imdbid)
+                //console.log("user2 ", user2movie.imdbid)
+                if(user1movie.imdbid === user2movie.imdbid){
+                    personList.push(user1movie)
+                    console.log("hei jeg heter nr 1: ", user2)
+                    break
+                }
+                
+            }
+        }
+        for(const user1movieFav of user1Fav.favoriteMovies){
+            for(const user2movieWish of user2Wish.wishlist){
+                //console.log("user1fav: ", user1movieFav.imdbid)
+                //console.log("user2wish: ", user2movieWish.imdbid)           
+                if(user1movieFav.imdbid === user2movieWish.imdbid){
+                   console.log("jeg heter: ", user1)
+                    imdbList.push(user1movieFav)
+                    
+                    
+                    break
+                }
+            }
+        }
+        setMoviesInWishAndFav(imdbList)
+        setPerson(personList)
+        moviesInWishAndFav.map(movie => {
+            console.log("test imdblist", movie)
+        })
+
+        personList.map((movie) => {
+            console.log("test personlist ", movie)
+        })
+    }
+
+    useEffect(() =>{
+        getCommonMoviesFromWishAndFav(loggedInUser, slug)
+        
+    }, [slug])
+ 
+    
+
     /* *********************** */
     /* ** Felles ønskeliste ** */
     /* *********************** */
@@ -58,6 +134,7 @@ export default function Dashboard( {onLogout}) {
     }, [slug])
 
 
+    
     // Tar i bruk funksjonen getMoviesData() for å hente alle filmer, og bruker "felles" listen
     useEffect(() => {
         getMoviesData(commonWishlist)
@@ -86,6 +163,7 @@ export default function Dashboard( {onLogout}) {
             for (const user2movie of user2FavoriteMovies.favoriteMovies) {
                 if (user1movie.imdbid === user2movie.imdbid) {
                     commonFavoriteMoviesData.push(user1movie)
+                    
                     break
                 }
             }
@@ -126,6 +204,7 @@ export default function Dashboard( {onLogout}) {
             for (const user2genre of user2FavoriteGenres.favoriteGenres) {
                 if (user1genre.genretitle === user2genre.genretitle) {
                     commonFavoriteGenres.push(user1genre)
+                    
                     break
                 }
             }
@@ -152,6 +231,7 @@ export default function Dashboard( {onLogout}) {
         return await fetch(url, apiClient)
         .then(response => response.json())
         .catch(error => console.error(error))
+        
     }
 
     // Henter api-data for alle filmer i "moviesList"
@@ -199,6 +279,25 @@ export default function Dashboard( {onLogout}) {
                     )}
                 </ul>
             </section>
+            <section>
+                <h2>felles i ønsk of fav</h2>
+                <p>sjekk ut dette</p>
+                <ul><li> <p>{slug} sine filmer</p>
+                     {commonData?.map((movie, index)=>
+                       
+                    <DashMovieCard key={index} movie={movie}/>
+                        
+                     )}
+                     </li>
+                     <li> 
+                        <p>{loggedInUser} sine filmer</p>
+                    {commonDat?.map((movie, index) =>
+                        <DashMovieCard key={index} movie={movie}/>
+                    )}
+                    </li>
+                </ul>
+            </section>
+            
             <Link to="/"><button onClick={handlelogout}>logout</button></Link>
             <h2>hællæ på dæ {loggedInUser}</h2>
         </main>

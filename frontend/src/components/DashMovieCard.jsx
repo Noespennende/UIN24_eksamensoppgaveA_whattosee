@@ -1,6 +1,8 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { apiClient } from "../../imdbapi/apiClient";
 
 export default function DashMovieCard({movie}) {
+
 
     const [imdbImage] = useState({
         url: movie.primaryImage.url,
