@@ -1,4 +1,4 @@
-import { client } from "../client"
+import { client, writeClient } from "../client"
 
 export async function fetchWishlistMoviesByUser(username){
     const data = await client.fetch(`*[_type == "users" && username == $username]{
@@ -32,6 +32,36 @@ export async function fetchFavoriteGenreByUser(username){
         "favorites": favoriteGenres[]->genretitle
     }`, {username : username})
     return data
+}
+
+export async function addFavoriteGenreToUser(userId, genreId){
+    const result = await writeClient
+    .patch(userId).setIfMissing({favoriteGenres: []})
+    .append("favoriteGenres", [{_type: "reference", _ref: genreId }])
+    .commit({autoGenerateArrayKeys: true})
+    .then(()=> {return "sucess"})
+    .catch((error) => {return "Error: " + error.message})
+    console.log("add result:" + result)
+    return result
+}
+
+export async function removeFavoriteGenreromUser(userId, genreId){
+    const result = await writeClient
+    .patch(userId).setIfMissing({favoriteGenres: []})
+    .unset([`favoriteGenres[_ref=="${genreId}"]`])
+    .commit()
+    .then(()=> {return "sucess"})
+    .catch((error) => {return "Error: " + error.message})
+    console.log("remove result:" + result)
+    return result
+}
+
+export async function fetchUserId(userName){
+    const data = await client.fetch(`*[_type == "users" && username == $username]{
+        "id": _id
+    }`, {username : userName})
+    
+     return data
 }
 
 
