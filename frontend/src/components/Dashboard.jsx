@@ -24,6 +24,7 @@ export default function Dashboard( {onLogout}) {
     const bruker1 = "Olaf"
     const bruker2 = "Hilde"
 
+    const [wishlist, setWishlist] = useState([])
     const [commonWishlist, setCommonWishlist] = useState([])
     const [commonWishlistData, setCommonWishlistData] = useState([])
 
@@ -63,7 +64,7 @@ export default function Dashboard( {onLogout}) {
     }, [slug])
 
     // Henter api-data for én film basert på imdbID
-    const getMovieData = async(imdbID) => {
+    const getMovieData = async (imdbID) => {
         const url = `https://moviesdatabase.p.rapidapi.com/titles/${imdbID}`
         return await fetch(url, apiClient)
         .then(response => response.json())
@@ -75,7 +76,7 @@ export default function Dashboard( {onLogout}) {
         const moviesData = []
         for (const movie of moviesList) {
             const movieData = await getMovieData(movie.imdbid); 
-            moviesData.push(movieData)
+            moviesData.push(movieData.results)
         }
         return moviesData
         
@@ -86,7 +87,8 @@ export default function Dashboard( {onLogout}) {
         getMoviesData(commonWishlist)
         .then(data => {
             setCommonWishlistData(data)
-            console.log(data)
+            console.log("test", data)
+            console.log("halloo", commonWishlistData);
         })
     }, [commonWishlist])
 
@@ -104,8 +106,8 @@ export default function Dashboard( {onLogout}) {
             <h3>Forslag for Bruker1 og Bruker2</h3>
             <section>
                 <h2>Catch up!</h2>
-                {commonWishlist?.map((movie, index) => 
-                <DashMovieCard key={index} imdbId={movie.imdbid} />)}
+                {commonWishlistData?.map((movie, index) => 
+                <DashMovieCard key={index} movie={movie} />)}
             </section>
             <section>
                 <h2>Go safe!</h2>
