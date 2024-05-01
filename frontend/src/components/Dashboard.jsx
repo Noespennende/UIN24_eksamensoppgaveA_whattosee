@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { fetchFavoriteMoviesByUser, fetchWishlistMoviesByUser } from "../../sanity/services/userServices";
+import { fetchFavoriteGenresByUser, fetchFavoriteMoviesByUser, fetchWishlistMoviesByUser } from "../../sanity/services/userServices";
 import { useEffect, useState } from "react";
 import DashMovieCard from "./DashMovieCard"
 import { fetchUsers } from "../../sanity/services/loginServices";
@@ -103,7 +103,7 @@ export default function Dashboard( {onLogout}) {
         getMoviesData(commonFavoriteMovies)
         .then(data => {
             setcommonFavoriteMoviesData(data)
-            console.log("Felles favoritter: ", commonFavoriteMovies)
+            //console.log("Felles favoritter: ", commonFavoriteMovies)
         })
     }, [commonFavoriteMovies])
 
@@ -111,9 +111,41 @@ export default function Dashboard( {onLogout}) {
     /* ** Felles favorittsjangre ** */
     /* **************************** */
 
-    // Kommer
+    const [commonFavoriteGenres, setCommonFavoriteGenres] = useState([])
+    const [commonFavoriteGenresData, setcommonFavoriteGenresData] = useState([])
 
+    // Sanity fetch -> setter commonFavoriteMovies -> alle filmer som to brukere har som favoritt
+    const getCommonFavoriteGenresByUsers = async (user1, user2) => {
+        const user1FavoriteGenres = await fetchFavoriteGenresByUser(user1)
+        const user2FavoriteGenres = await fetchFavoriteGenresByUser(user2)
+
+        const commonFavoriteGenres = []
+
+        // Prøvde sammenligne ._id, men da kom det en ikke-felles fra user1genre med i listen
+        for (const user1genre of user1FavoriteGenres.favoriteGenres) {
+            for (const user2genre of user2FavoriteGenres.favoriteGenres) {
+                if (user1genre.genretitle === user2genre.genretitle) {
+                    commonFavoriteGenres.push(user1genre)
+                    break
+                }
+            }
+        }
+
+        setCommonFavoriteGenres(commonFavoriteGenres);
+        //console.log("User1genre: ", user1FavoriteGenres)
+        //console.log("User2genre: ", user2FavoriteGenres)
+        //console.log("Genres :", commonFavoriteGenres)
+    }
+
+    // Tar i bruk metoden getCommonFavoriteMoviesUsers()
+    useEffect(() => {
+        getCommonFavoriteGenresByUsers(loggedInUser, slug)
+    }, [slug])
+
+    /* ************** */
     /* ** API-kall ** */
+    /* ************** */
+
     // Henter api-data for én film basert på imdbID
     const getMovieData = async (imdbID) => {
         const url = `https://moviesdatabase.p.rapidapi.com/titles/${imdbID}`
@@ -151,7 +183,11 @@ export default function Dashboard( {onLogout}) {
             </section>
             <section>
                 <h2>Utforsk!</h2>
-                <DashMovieCard/>
+                <ul>
+                    {commonFavoriteGenres?.map((genre, index) =>
+                    <li key={index}>{genre.genretitle}</li>
+                    )}
+                </ul>
             </section>
             <Link to="/"><button onClick={handlelogout}>logout</button></Link>
             <h2>hællæ på dæ {loggedInUser}</h2>

@@ -18,6 +18,15 @@ export async function fetchFavoriteMoviesByUser(username){
      return data[0]
 }
 
+export async function fetchFavoriteGenresByUser(username){
+    const data = await client.fetch(`*[_type == "users" && username == $username]{
+        favoriteGenres[]->{
+            genretitle
+        }
+    }`, {username : username})
+    return data[0]
+}
+
 export async function fetchFavoriteGenreByUser(username){
     const data = await client.fetch(`*[_type == "users" && username == $username]{
         "favorites": favoriteGenres[]->genretitle
