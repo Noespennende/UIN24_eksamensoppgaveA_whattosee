@@ -21,7 +21,6 @@ export default function Genres(){
         const genreData = await fetchAllGenres()
         setGenreList(genreData)
         setUserGenres(userData[0].favorites)
-        console.log(userGenres)
 
     }
 
@@ -34,7 +33,7 @@ export default function Genres(){
         <main>
             <h1>Sjangere</h1>
             <ul>
-                {genreList?.map((genre, index) => <li key={"genre"+index}><GenreCard title={genre.genretitle} genreId={genre.id} url={genre.url} userGenres={(userGenres) ? (userGenres) : ([])} userId={userId}/></li>)}
+                {genreList?.map((genre, index) => <li key={"genre"+index}><GenreCard title={genre.genretitle} genreId={genre.id} url={genre.url} userGenres={(userGenres) ? (userGenres) : ([])} userId={userId} index={index}/></li>)}
             </ul>
         </main>
     )
