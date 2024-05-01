@@ -8,10 +8,11 @@ import { apiClient } from "../../imdbapi/apiClient";
 export default function Dashboard( {onLogout}) {
     
     const {slug} = useParams()
+
+    /* ** Logg ut / Innlogget bruker ** */
     const[users,setUsers] = useState([])
     const loggedInUser = JSON.parse(localStorage.getItem('LoggedInUser'))
 
-    /* ** Logg ut / Innlogget bruker ** */
     const handlelogout =() =>{
         onLogout()
     }
@@ -112,7 +113,6 @@ export default function Dashboard( {onLogout}) {
     /* **************************** */
 
     const [commonFavoriteGenres, setCommonFavoriteGenres] = useState([])
-    const [commonFavoriteGenresData, setcommonFavoriteGenresData] = useState([])
 
     // Sanity fetch -> setter commonFavoriteMovies -> alle filmer som to brukere har som favoritt
     const getCommonFavoriteGenresByUsers = async (user1, user2) => {
@@ -165,6 +165,7 @@ export default function Dashboard( {onLogout}) {
         
     }
     
+    //console.log(commonFavoriteMoviesData)
 
     return(
         <main>
@@ -173,16 +174,25 @@ export default function Dashboard( {onLogout}) {
             <h3>Forslag for {loggedInUser} og {slug}</h3>
             <section>
                 <h2>Catch up!</h2>
+                {commonWishlist.length > 1 
+                ? (<p>Dere har {commonWishlist.length} filmer felles i ønskelisten deres.</p>) 
+                : <p>Dere har {commonWishlist.length} film felles i ønskelisten deres.</p>
+                }
                 {commonWishlistData?.map((movie, index) => 
                 <DashMovieCard key={index} movie={movie} />)}
             </section>
             <section>
                 <h2>Go safe!</h2>
+                {commonWishlist.length > 1 
+                ? (<p>Dere har {commonWishlist.length} filmer felles i favorittlisten deres.</p>) 
+                : <p>Dere har {commonWishlist.length} film felles i favorittlisten deres.</p>
+                }
                 {commonFavoriteMoviesData?.map((movie, index) => 
                 <DashMovieCard key={index} movie={movie} />)}
             </section>
             <section>
                 <h2>Utforsk!</h2>
+                <p>Dere liker begge disse sjangerne. Sjekk hvilke filmer som finnes å velge mellom:</p>
                 <ul>
                     {commonFavoriteGenres?.map((genre, index) =>
                     <li key={index}>{genre.genretitle}</li>
