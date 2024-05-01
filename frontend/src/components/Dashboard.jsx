@@ -183,9 +183,9 @@ export default function Dashboard( {onLogout}) {
             </section>
             <section>
                 <h2>Go safe!</h2>
-                {commonWishlist.length > 1 
-                ? (<p>Dere har {commonWishlist.length} filmer felles i favorittlisten deres.</p>) 
-                : <p>Dere har {commonWishlist.length} film felles i favorittlisten deres.</p>
+                {commonFavoriteMoviesData.length > 1 
+                ? (<p>Dere har {commonFavoriteMoviesData.length} filmer felles i favorittlisten deres.</p>) 
+                : <p>Dere har {commonFavoriteMoviesData.length} film felles i favorittlisten deres.</p>
                 }
                 {commonFavoriteMoviesData?.map((movie, index) => 
                 <DashMovieCard key={index} movie={movie} />)}
