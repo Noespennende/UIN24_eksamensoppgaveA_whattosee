@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react"
-import { apiClient } from "../../imdbapi/apiClient";
+import { useState } from "react"
+
 
 export default function DashMovieCard({movie}) {
 
