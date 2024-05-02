@@ -74,7 +74,7 @@ export default function FrontPage({ onLogout, imdbId }) {
                 <h3>Filmer jeg skal se!</h3>
                 <p>Disse filmene ligger i ønskelisten din:</p>
                 {wishlist?.map((movie, index) => (
-                    <MovieCard key={index} imdbId={movie.imdbId} />))}
+                    <MovieCard key={index} title={movie.movietitle} imdbId={movie.imdbid} />))}
             </section>
             <article id="se_med">
                 <h3>Jeg skal se sammen med...</h3>
