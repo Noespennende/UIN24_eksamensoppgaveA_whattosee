@@ -11,15 +11,16 @@ export default function MovieCard({movie, className}) {
         caption: movie.primaryImage.caption.plainText
     })
 
+
     return (
         <article className={className}>
-            <Link to={`https://www.imdb.com/title/${movie.imdbid}`}>
+            <Link to={`https://www.imdb.com/title/${movie.id}`}>
                 <picture>
                     <source media="(min-width:300px)" srcSet={imdbImage?.url}/>
                     <img src={imdbImage?.url} alt={imdbImage?.caption}  width="300" height="420"></img>
                 </picture>
             </Link>
-            <Link to={`https://www.imdb.com/title/${movie.imdbid}`}>
+            <Link to={`https://www.imdb.com/title/${movie.id}`}>
                 <h3>{movie.titleText.text}</h3>
             </Link>
         </article>

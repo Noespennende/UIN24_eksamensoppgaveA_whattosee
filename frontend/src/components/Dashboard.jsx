@@ -12,7 +12,7 @@ export default function Dashboard() {
 
     return(
         <section>
-            <h3>Forslag for {loggedInUser} og {slug}</h3>
+            <h1>Forslag for {loggedInUser} og {slug}</h1>
             <CommonWishes user1={loggedInUser} user2={slug}/>
             <CommonFavories user1={loggedInUser} user2={slug}/>
             <CommonGenres user1={loggedInUser} user2={slug}/>

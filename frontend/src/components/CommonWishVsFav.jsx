@@ -70,21 +70,22 @@ export default function CommonWishVsFav({user1, user2}) {
 
     return (
         <section>
-                <h2>felles i ønsk of fav</h2>
+                <h2>Ønskeliste vs Favoritter</h2>
                 <p>sjekk ut dette</p>
-                <ul><li> <p>{user2} sine filmer</p>
+                <ul>
+                     <li> 
+                        <h3>Din ønskeliste vs {user2} sine favoritter</h3>
+                    {moviesDataUser2WishVsUser1Fav?.map((movie, index) =>
+                        <MovieCard key={index} movie={movie} className="mixedDash"/>
+                    )}
+                    </li>
+                    <li> <h3>{user2} ønskeliste vs dine favoritter</h3>
                      {moviesDataUser1WishVsUser2Fav?.map((movie, index)=>
                        
                     <MovieCard key={index} movie={movie} className="mixedDash"/>
                         
                      )}
                      </li>
-                     <li> 
-                        <p>{user1} sine filmer</p>
-                    {moviesDataUser2WishVsUser1Fav?.map((movie, index) =>
-                        <MovieCard key={index} movie={movie} className="mixedDash"/>
-                    )}
-                    </li>
                 </ul>
             </section>
     )

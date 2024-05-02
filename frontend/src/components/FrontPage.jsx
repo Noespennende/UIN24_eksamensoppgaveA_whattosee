@@ -58,7 +58,7 @@ export default function FrontPage({ onLogout, loggedInUser}) {
                 {apiData?.map((movie, index) => (
                     <MovieCard key={index} movie={movie} className={"frontPageMc"} />))}
             </section>
-            <article id="se_med">
+            <section id="se_med">
                 <h3>Jeg skal se sammen med...</h3>
                 <ul>
                     {users.map((user, index) => ((user.username.toLowerCase() === loggedInUser) ? ("") : (
@@ -66,7 +66,7 @@ export default function FrontPage({ onLogout, loggedInUser}) {
                             <Link to={`/Dashboard/${user.username}`}>{user.username}</Link>
                         </li>)))}
                 </ul>
-            </article >
+            </section >
         </>
     )
 }
