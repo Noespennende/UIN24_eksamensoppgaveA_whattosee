@@ -44,22 +44,26 @@ export default function Dashboard( {onLogout}) {
         const user1WishMovieIDs = []
         const user2WishMovieIDs = []
 
-        for(const user1movie of user1Wish.wishlist){
-            for(const user2movie of user2Fav.favoriteMovies){
-                if(user1movie.imdbid === user2movie.imdbid){
-                    user2WishMovieIDs.push(user1movie)
-                    break
+        if (user1Wish.wishlist && user2Fav.favoriteMovies) {
+            for(const user1movie of user1Wish.wishlist){
+                for(const user2movie of user2Fav.favoriteMovies){
+                    if(user1movie.imdbid === user2movie.imdbid){
+                        user2WishMovieIDs.push(user1movie)
+                        break
+                    }
+                    
                 }
-                
             }
         }
 
-        for(const user1movieFav of user1Fav.favoriteMovies){
-            for(const user2movieWish of user2Wish.wishlist){           
-                if(user1movieFav.imdbid === user2movieWish.imdbid){
-                    user1WishMovieIDs.push(user1movieFav)
-                    
-                    break
+        if (user1Fav.favoriteMovies && user2Wish.wishlist ) {
+            for(const user1movieFav of user1Fav?.favoriteMovies){
+                for(const user2movieWish of user2Wish?.wishlist){           
+                    if(user1movieFav.imdbid === user2movieWish.imdbid){
+                        user1WishMovieIDs.push(user1movieFav)
+                        
+                        break
+                    }
                 }
             }
         }
@@ -69,7 +73,7 @@ export default function Dashboard( {onLogout}) {
     }
 
     // "Initialiserer" getCommonMoviesFromWishAndFav()
-    useEffect(() =>{
+    useEffect(() => {
         getCommonMoviesFromWishAndFav(loggedInUser, slug)   
     }, [slug])
 
@@ -104,16 +108,19 @@ export default function Dashboard( {onLogout}) {
 
         const commonWishlistMovieIDs = []
 
-        for (const user1movie of user1Wishlist.wishlist) {
-            for (const user2movie of user2Wishlist.wishlist) {
-                if (user1movie.imdbid === user2movie.imdbid) {
-                    commonWishlistMovieIDs.push(user1movie)
-                    break
+        if (user1Wishlist.wishlist && user2Wishlist.wishlist) {
+            for (const user1movie of user1Wishlist.wishlist) {
+                for (const user2movie of user2Wishlist.wishlist) {
+                    if (user1movie.imdbid === user2movie.imdbid) {
+                        commonWishlistMovieIDs.push(user1movie)
+                        break
+                    }
                 }
             }
         }
 
         setCommonWishlistMovieIDs(commonWishlistMovieIDs);
+    
     }
 
     // "Initialiserer" getCommonWishlistMovieIDsForUsers()
@@ -143,15 +150,18 @@ export default function Dashboard( {onLogout}) {
 
         const commonFavoriteMovieIDs = []
 
-        for (const user1movie of user1FavoriteMovieIDs.favoriteMovies) {
-            for (const user2movie of user2FavoriteMovieIDs.favoriteMovies) {
-                if (user1movie.imdbid === user2movie.imdbid) {
-                    commonFavoriteMovieIDs.push(user1movie)
-                    
-                    break
+        if (user1FavoriteMovieIDs.favoriteMovies && user2FavoriteMovieIDs.favoriteMovies) {
+            for (const user1movie of user1FavoriteMovieIDs.favoriteMovies) {
+                for (const user2movie of user2FavoriteMovieIDs.favoriteMovies) {
+                    if (user1movie.imdbid === user2movie.imdbid) {
+                        commonFavoriteMovieIDs.push(user1movie)
+                        
+                        break
+                    }
                 }
             }
         }
+
         setCommonFavoriteMovieIDs(commonFavoriteMovieIDs);
     }
 
@@ -186,13 +196,15 @@ export default function Dashboard( {onLogout}) {
         console.log("user1 ", user1FavoriteGenres)
         const commonFavoriteGenres = []
 
-        // Prøvde sammenligne ._id, men da kom det en ikke-felles fra user1genre med i listen
-        for (const user1genre of user1FavoriteGenres) { //of user1FavoriteGenres.favoriteGenres
-            for (const user2genre of user2FavoriteGenres) { //og user2FavoriteGenres.favoriteGenres
-                if (user1genre === user2genre) { // user1genre.genretitle === user2genre.genretitle
-                    commonFavoriteGenres.push(user1genre)
-                    
-                    break
+        if (user1FavoriteGenres && user2FavoriteGenres) {
+            // Prøvde sammenligne ._id, men da kom det en ikke-felles fra user1genre med i listen
+            for (const user1genre of user1FavoriteGenres) { //of user1FavoriteGenres.favoriteGenres
+                for (const user2genre of user2FavoriteGenres) { //og user2FavoriteGenres.favoriteGenres
+                    if (user1genre === user2genre) { // user1genre.genretitle === user2genre.genretitle
+                        commonFavoriteGenres.push(user1genre)
+                        
+                        break
+                    }
                 }
             }
         }
@@ -235,7 +247,7 @@ export default function Dashboard( {onLogout}) {
             <h3>Forslag for {loggedInUser} og {slug}</h3>
             <section>
                 <h2>Catch up!</h2>
-                {commonWishlistMovieIDs.length > 1 
+                {commonWishlistMovieIDs.length > 1 || commonWishlistMovieIDs.length == 0
                 ? (<p>Dere har {commonWishlistMovieIDs.length} filmer felles i ønskelisten deres.</p>) 
                 : <p>Dere har {commonWishlistMovieIDs.length} film felles i ønskelisten deres.</p>
                 }
@@ -244,7 +256,7 @@ export default function Dashboard( {onLogout}) {
             </section>
             <section>
                 <h2>Go safe!</h2>
-                {commonFavoriteMoviesData.length > 1 
+                {commonFavoriteMoviesData.length > 1 || commonFavoriteMoviesData.length == 0
                 ? (<p>Dere har {commonFavoriteMoviesData.length} filmer felles i favorittlisten deres.</p>) 
                 : <p>Dere har {commonFavoriteMoviesData.length} film felles i favorittlisten deres.</p>
                 }
