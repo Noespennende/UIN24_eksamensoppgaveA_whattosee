@@ -22,18 +22,23 @@ export async function fetchFavoriteMoviesByUser(username) {
 export async function fetchFavoriteGenresByUser(username) {
     const data = await client.fetch(`*[_type == "users" && username == $username]{
         favoriteGenres[]->{
-            genretitle
+            genretitle,
+            "url": genreurl.current
         }
     }`, { username: username })
     return data[0]
 }
 
-export async function fetchFavoriteGenreByUser(username) {
+
+// Kommentert ut gammel fetchFavoriteGenresByUser -> I tilfellet det ikke funker helt enda
+/*
+export async function fetchFavoriteGenresByUser(username) {
     const data = await client.fetch(`*[_type == "users" && username == $username]{
         "favorites": favoriteGenres[]->genretitle
     }`, { username: username })
     return data
 }
+*/
 
 export async function addFavoriteGenreToUser(userId, genreId) {
     const result = await writeClient

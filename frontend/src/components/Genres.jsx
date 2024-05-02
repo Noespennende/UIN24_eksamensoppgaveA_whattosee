@@ -3,7 +3,7 @@ import { useState } from "react";
 import { fetchAllGenres } from "../../sanity/services/genreServices";
 import GenreCard from "./GenreCard";
 import { fetchUserId } from "../../sanity/services/userServices";
-import { fetchFavoriteGenreByUser } from "../../sanity/services/userServices";
+import { fetchFavoriteGenresByUser } from "../../sanity/services/userServices";
 
 export default function Genres(){
     const [genreList, setGenreList] = useState([])
@@ -17,7 +17,7 @@ export default function Genres(){
     }
 
     const getGenreData = async () => {
-        const userData = await fetchFavoriteGenreByUser(loggedInUser)
+        const userData = await fetchFavoriteGenresByUser(loggedInUser)
         const genreData = await fetchAllGenres()
         setGenreList(genreData)
         setUserGenres(userData[0].favorites)

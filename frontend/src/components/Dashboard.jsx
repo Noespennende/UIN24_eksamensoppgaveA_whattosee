@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { fetchFavoriteGenreByUser, fetchFavoriteMoviesByUser, fetchWishlistMoviesByUser } from "../../sanity/services/userServices";
+import { fetchFavoriteGenresByUser, fetchFavoriteMoviesByUser, fetchWishlistMoviesByUser } from "../../sanity/services/userServices";
 import { useEffect, useState } from "react";
 import DashMovieCard from "./DashMovieCard"
 import { fetchUsers } from "../../sanity/services/loginServices";
@@ -147,8 +147,8 @@ export default function Dashboard( {onLogout}) {
 
     // Sanity fetch -> setter commonFavoriteMovies -> alle filmer som to brukere har som favoritt
     const getCommonFavoriteGenresByUsers = async (user1, user2) => {
-        const user1FavoriteGenres = (await fetchFavoriteGenreByUser(user1))[0].favorites
-        const user2FavoriteGenres = (await fetchFavoriteGenreByUser(user2))[0].favorites
+        const user1FavoriteGenres = (await fetchFavoriteGenresByUser(user1))
+        const user2FavoriteGenres = (await fetchFavoriteGenresByUser(user2))
         
 
         console.log("user1 ", user1FavoriteGenres)
@@ -156,9 +156,9 @@ export default function Dashboard( {onLogout}) {
 
         if (user1FavoriteGenres && user2FavoriteGenres) {
             // Prøvde sammenligne ._id, men da kom det en ikke-felles fra user1genre med i listen
-            for (const user1genre of user1FavoriteGenres) { //of user1FavoriteGenres.favoriteGenres
-                for (const user2genre of user2FavoriteGenres) { //og user2FavoriteGenres.favoriteGenres
-                    if (user1genre === user2genre) { // user1genre.genretitle === user2genre.genretitle
+            for (const user1genre of user1FavoriteGenres.favoriteGenres) {
+                for (const user2genre of user2FavoriteGenres.favoriteGenres) {
+                    if (user1genre.genretitle === user2genre.genretitle) {
                         commonFavoriteGenres.push(user1genre)
                         
                         break
@@ -193,7 +193,7 @@ export default function Dashboard( {onLogout}) {
                 <p>Dere liker begge disse sjangerne. Sjekk hvilke filmer som finnes å velge mellom:</p>
                 <ul>
                     {commonFavoriteGenres?.map((genre, index) =>
-                    <li key={index}><Link to={`/${genre.toLowerCase()}/genre`}>{genre}</Link></li> // genre.genreurl.current og {genre.genretitle}
+                    <li key={index}><Link to={`/${genre.url}/genre`}>{genre.genretitle}</Link></li>
                     )}
                 </ul>
             </section>
