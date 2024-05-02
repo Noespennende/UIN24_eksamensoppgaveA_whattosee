@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { getMoviesData } from "../../imdbapi/apiServices"
 import { fetchWishlistMoviesByUser } from "../../sanity/services/userServices"
 import DashMovieCard from "./DashMovieCard"
+import MovieCard from "./MovieCard"
 
 export default function CommonWishes({user1, user2}) {
 
@@ -55,7 +56,7 @@ export default function CommonWishes({user1, user2}) {
                 : <p>Dere har {commonWishlistMovieIDs.length} film felles i ønskelisten deres.</p>
                 }
                 {commonWishlistMoviesData?.map((movie, index) => 
-                <DashMovieCard key={index} movie={movie} />)}
+                <MovieCard key={index} movie={movie} className="wishlistDash"/>)}
             </section>
     )
 }
