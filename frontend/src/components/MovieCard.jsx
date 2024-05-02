@@ -28,7 +28,7 @@ export default function MovieCard({movie, className}) {
 
 
     return (
-        <article htmlClass={className}>
+        <article className={className}>
             <Link to={`https://www.imdb.com/title/${movie.imdbid}`}>
                 <picture>
                     <source media="(min-width:300px)" srcSet={imdbImage?.url}/>
