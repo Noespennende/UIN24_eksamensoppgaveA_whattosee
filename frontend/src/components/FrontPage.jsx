@@ -6,10 +6,9 @@ import MovieCard from './MovieCard'
 import { apiClient } from "../../imdbapi/apiClient"
 
 
-export default function FrontPage({ onLogout, imdbId }) {
+export default function FrontPage({ onLogout, imdbId, loggedInUser}) {
     const { slug } = useParams()
     const [users, setUsers] = useState([])
-    const loggedInUser = JSON.parse(localStorage.getItem('LoggedInUser'))
     const [wishlist, setWishlist] = useState([])
     const wishlistArray = []
     const [imdbImage, setImdbImage] = useState()
@@ -18,6 +17,7 @@ export default function FrontPage({ onLogout, imdbId }) {
         const fetchData = async () => {
             const allUsers = await fetchUsers()
             const usersFiltered = allUsers.filter(user => user.username !== loggedInUser)
+            console.log(usersFiltered)
             setUsers(usersFiltered)
         }
         fetchData();
@@ -52,6 +52,7 @@ export default function FrontPage({ onLogout, imdbId }) {
 
     useEffect(() => {
         fetchImdbData(imdbId)
+        console.log("logged inn: " + loggedInUser)
     }, [imdbId])
 
 
@@ -67,10 +68,10 @@ export default function FrontPage({ onLogout, imdbId }) {
             <article id="se_med">
                 <h3>Jeg skal se sammen med...</h3>
                 <ul>
-                    {users.map((user, index) => (
+                    {users.map((user, index) => ((user.username.toLowerCase() === loggedInUser) ? ("") : (
                         <li key={index}>
                             <Link to={`/Dashboard/${user.username}`}>{user.username}</Link>
-                        </li>))}
+                        </li>)))}
                 </ul>
             </article >
         </>

@@ -1,12 +1,13 @@
+import { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 
-export default function Layout({children}) {
-    const loggedInUser = JSON.parse(localStorage.getItem('LoggedInUser'))
+export default function Layout({children, setLoggedInn, loggedInUser, setLoggedInUser}) {
+
 
     return (
         <>
         <header>
-            <NavBar LoggedInUser={loggedInUser}/>
+            <NavBar LoggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} loggedInn={setLoggedInn}/>
         </header>
         <main>
             {children}
