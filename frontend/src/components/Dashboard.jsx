@@ -267,7 +267,7 @@ export default function Dashboard( {onLogout}) {
                 <p>Dere liker begge disse sjangerne. Sjekk hvilke filmer som finnes å velge mellom:</p>
                 <ul>
                     {commonFavoriteGenres?.map((genre, index) =>
-                    <li key={index}>{genre}</li> // {genre.genretitle}
+                    <li key={index}><Link to={`/${genre.toLowerCase()}/genre`}>{genre}</Link></li> // genre.genreurl.current og {genre.genretitle}
                     )}
                 </ul>
             </section>
