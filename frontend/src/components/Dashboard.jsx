@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { fetchFavoriteGenresByUser, fetchFavoriteMoviesByUser, fetchWishlistMoviesByUser } from "../../sanity/services/userServices";
+import { fetchFavoriteGenreByUser, fetchFavoriteMoviesByUser, fetchWishlistMoviesByUser } from "../../sanity/services/userServices";
 import { useEffect, useState } from "react";
 import DashMovieCard from "./DashMovieCard"
 import { fetchUsers } from "../../sanity/services/loginServices";
@@ -89,8 +89,6 @@ export default function Dashboard( {onLogout}) {
         getMoviesData(movieIDsUser1WishVsUser2Fav)
         .then(data => {
             setMoviesDataUser1WishVsUser2Fav(data)
-            //console.log("test", data)
-            //console.log("halloo", moviesInWishAndFav);
         })
     }, [movieIDsUser1WishVsUser2Fav])
     
@@ -99,8 +97,6 @@ export default function Dashboard( {onLogout}) {
         getMoviesData(movieIDsUser2WishVsUser1Fav)
         .then(data => {
             setMoviesDataUser2WishVsUser1Fav(data)
-            //console.log("test", data)
-            console.log("halloo kommondatt", movieIDsUser2WishVsUser1Fav);
         })
     }, [movieIDsUser2WishVsUser1Fav])
  
@@ -181,7 +177,6 @@ export default function Dashboard( {onLogout}) {
         getMoviesData(commonFavoriteMovieIDs)
         .then(data => {
             setcommonFavoriteMoviesData(data)
-            //console.log("Felles favoritter: ", commonFavoriteMovies)
         })
     }, [commonFavoriteMovieIDs])
 
@@ -193,15 +188,18 @@ export default function Dashboard( {onLogout}) {
 
     // Sanity fetch -> setter commonFavoriteMovies -> alle filmer som to brukere har som favoritt
     const getCommonFavoriteGenresByUsers = async (user1, user2) => {
-        const user1FavoriteGenres = await fetchFavoriteGenresByUser(user1)
-        const user2FavoriteGenres = await fetchFavoriteGenresByUser(user2)
+        const user1FavoriteGenres = (await fetchFavoriteGenreByUser(user1))[0].favorites
+        //const user1FavoriteGenres = await fetchFavoriteGenresByUser(user1)
+        const user2FavoriteGenres = (await fetchFavoriteGenreByUser(user2))[0].favorites
+        //const user2FavoriteGenres = await fetchFavoriteGenresByUser(user2)
 
+        console.log("user1 ", user1FavoriteGenres)
         const commonFavoriteGenres = []
 
         // Prøvde sammenligne ._id, men da kom det en ikke-felles fra user1genre med i listen
-        for (const user1genre of user1FavoriteGenres.favoriteGenres) {
-            for (const user2genre of user2FavoriteGenres.favoriteGenres) {
-                if (user1genre.genretitle === user2genre.genretitle) {
+        for (const user1genre of user1FavoriteGenres) { //of user1FavoriteGenres.favoriteGenres
+            for (const user2genre of user2FavoriteGenres) { //og user2FavoriteGenres.favoriteGenres
+                if (user1genre === user2genre) { // user1genre.genretitle === user2genre.genretitle
                     commonFavoriteGenres.push(user1genre)
                     
                     break
@@ -210,9 +208,6 @@ export default function Dashboard( {onLogout}) {
         }
 
         setCommonFavoriteGenres(commonFavoriteGenres);
-        //console.log("User1genre: ", user1FavoriteGenres)
-        //console.log("User2genre: ", user2FavoriteGenres)
-        //console.log("Genres :", commonFavoriteGenres)
     }
 
     // Tar i bruk metoden getCommonFavoriteMoviesUsers()
@@ -272,7 +267,7 @@ export default function Dashboard( {onLogout}) {
                 <p>Dere liker begge disse sjangerne. Sjekk hvilke filmer som finnes å velge mellom:</p>
                 <ul>
                     {commonFavoriteGenres?.map((genre, index) =>
-                    <li key={index}>{genre.genretitle}</li>
+                    <li key={index}>{genre}</li> // {genre.genretitle}
                     )}
                 </ul>
             </section>
