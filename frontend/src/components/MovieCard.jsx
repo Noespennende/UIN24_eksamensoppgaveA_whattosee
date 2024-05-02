@@ -5,27 +5,10 @@ import { apiClient } from "../../imdbapi/apiClient";
 
 export default function MovieCard({movie, className}) {
 
-    const [imdbImage, setImdbImage] = useState()
-
-    const fetchImdbData = async() => {
-        const url = `https://moviesdatabase.p.rapidapi.com/titles/${movie.imdbid}`;
-        try {
-            const response = await fetch(url, apiClient);
-            const result = await response.json();
-            setImdbImage(
-                {
-                    url: result.results.primaryImage.url,
-                    caption: result.results.primaryImage.caption.plainText
-                })
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    useEffect(() => {
-        fetchImdbData()
-    },[])
-
+    const [imdbImage] = useState({
+        url: movie.primaryImage.url,
+        caption: movie.primaryImage.caption.plainText
+    })
 
     return (
         <article className={className}>

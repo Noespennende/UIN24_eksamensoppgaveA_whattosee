@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { fetchMoviesByGenre } from "../../sanity/services/movieServices"
+import { getMoviesData } from "../../imdbapi/apiServices"
 
 
 export default function Genre() {
@@ -18,13 +19,24 @@ export default function Genre() {
 
     }, [slug])
 
+    const [movieApiData, setMovieApiData] = useState()
+
+    useEffect(() => {
+        getMoviesData(movieList)
+        .then(data => {
+            setMovieApiData(data)
+        })
+    }, [movieList])
+
+
     return (
         <section>
             <h1>Sjanger: {slug?.charAt(0).toUpperCase() + slug?.slice(1)} ({movieList?.length} filmer)</h1>
             <ul>
-                {movieList?.map((movie, index) => <li key={"movie" + index}><MovieCard movie={movie} className="mcgenre"/></li>)}
+                {movieApiData?.map((movie, index) => <li key={"movie" + index}><MovieCard movie={movie} className="mcgenre"/></li>)}   
             </ul>
         </section>
     )
 
+    
 }

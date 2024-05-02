@@ -6,8 +6,9 @@ import { fetchUsers } from "../../sanity/services/loginServices";
 import { apiClient } from "../../imdbapi/apiClient";
 import { getMoviesData } from "../../imdbapi/apiServices";
 import CommonWishes from "./CommonWishes";
+import MovieCard from "./MovieCard";
 
-export default function Dashboard() {
+export default function Dashboard( {onLogout}) {
     
     const {slug} = useParams()
 
@@ -15,7 +16,9 @@ export default function Dashboard() {
     const[users,setUsers] = useState([])
     const loggedInUser = JSON.parse(localStorage.getItem('LoggedInUser'))
 
-    
+    const handlelogout =() =>{
+        onLogout()
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -184,7 +187,7 @@ export default function Dashboard() {
                 : <p>Dere har {commonFavoriteMoviesData.length} film felles i favorittlisten deres.</p>
                 }
                 {commonFavoriteMoviesData?.map((movie, index) => 
-                <DashMovieCard key={index} movie={movie} />)}
+                <MovieCard key={index} movie={movie} className="favoritesDash"/>)}
             </section>
             <section>
                 <h2>Utforsk!</h2>
@@ -201,14 +204,14 @@ export default function Dashboard() {
                 <ul><li> <p>{slug} sine filmer</p>
                      {moviesDataUser1WishVsUser2Fav?.map((movie, index)=>
                        
-                    <DashMovieCard key={index} movie={movie}/>
+                    <MovieCard key={index} movie={movie} className="mixedDash"/>
                         
                      )}
                      </li>
                      <li> 
                         <p>{loggedInUser} sine filmer</p>
                     {moviesDataUser2WishVsUser1Fav?.map((movie, index) =>
-                        <DashMovieCard key={index} movie={movie}/>
+                        <MovieCard key={index} movie={movie} className="mixedDash"/>
                     )}
                     </li>
                 </ul>

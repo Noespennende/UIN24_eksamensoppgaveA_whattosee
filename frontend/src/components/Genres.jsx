@@ -20,7 +20,7 @@ export default function Genres(){
         const userData = await fetchFavoriteGenresByUser(loggedInUser)
         const genreData = await fetchAllGenres()
         setGenreList(genreData)
-        setUserGenres(userData[0].favorites)
+        setUserGenres(userData)
 
     }
 

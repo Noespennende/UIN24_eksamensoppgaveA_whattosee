@@ -24,7 +24,7 @@ export default function GenreCard({title, genreId, url, userGenres, userId, inde
     return(
         <article>
             <Link to={`/${url}/genre`}>{title}</Link>
-            {(userGenres.includes(title)) ?
+            {(userGenres.favoriteGenres.some(genre => genre.genretitle === title)) ?
             (<button id={`removeFavorite${index}`} onClick={() =>handleRemoveFromFavoriteClick()}><RxStarFilled /> Favorittsjanger</button>)
             :
             (<button id={`addFavorite${index}`} onClick={() => handleAddToFavoriteClick()}><RxStar /> Legg til favoritter</button>)}
