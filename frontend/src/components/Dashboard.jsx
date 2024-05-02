@@ -248,7 +248,7 @@ export default function Dashboard( {onLogout}) {
     //console.log(commonFavoriteMoviesData)
 
     return(
-        <main>
+        <section>
             {users.map((user, index) => (
             <h1 key={index}>Forslag til {user.username}</h1>))}
             <h3>Forslag for {loggedInUser} og {slug}</h3>
@@ -300,7 +300,7 @@ export default function Dashboard( {onLogout}) {
             
             <Link to="/"><button onClick={handlelogout}>logout</button></Link>
             <h2>hællæ på dæ {loggedInUser}</h2>
-        </main>
+        </section>
         
     )
 }

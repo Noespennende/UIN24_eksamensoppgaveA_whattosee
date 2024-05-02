@@ -1,4 +1,4 @@
-import MovieCard from "./Moviecard"
+import MovieCard from "./MovieCard"
 import { useState } from "react"
 import { useEffect} from "react"
 import { useParams } from "react-router-dom"
@@ -19,12 +19,12 @@ export default function Genre(){
         },[slug])
 
     return(
-        <main>
+        <section>
             <h1>Sjanger: {slug?.charAt(0).toUpperCase()+ slug?.slice(1)} ({movieList?.length} filmer)</h1>
             <ul>
                 {movieList?.map((movie, index) => <li key={"movie"+index}><MovieCard title={movie.movietitle} imdbId={movie.imdbid}/></li>)}
             </ul>
-        </main>
+        </section>
     )
 
 }
