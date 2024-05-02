@@ -7,6 +7,7 @@ import { apiClient } from "../../imdbapi/apiClient";
 import { getMoviesData } from "../../imdbapi/apiServices";
 import CommonWishes from "./CommonWishes";
 import MovieCard from "./MovieCard";
+import CommonFavories from "./CommonFavorites";
 
 export default function Dashboard( {onLogout}) {
     
@@ -96,48 +97,6 @@ export default function Dashboard( {onLogout}) {
         })
     }, [movieIDsUser2WishVsUser1Fav])
  
-    /* *************************** */
-    /* ** Felles favorittfilmer ** */
-    /* *************************** */
-
-    const [commonFavoriteMovieIDs, setCommonFavoriteMovieIDs] = useState([])
-    const [commonFavoriteMoviesData, setcommonFavoriteMoviesData] = useState([])
-
-    // Sanity fetch -> setter commonFavoriteMovies -> alle filmer som to brukere har som favoritt
-    const getCommonFavoriteMoviesForUsers = async (user1, user2) => {
-        const user1FavoriteMovieIDs = await fetchFavoriteMoviesByUser(user1)
-        const user2FavoriteMovieIDs = await fetchFavoriteMoviesByUser(user2)
-
-        const commonFavoriteMovieIDs = []
-
-        if (user1FavoriteMovieIDs.favoriteMovies && user2FavoriteMovieIDs.favoriteMovies) {
-            for (const user1movie of user1FavoriteMovieIDs.favoriteMovies) {
-                for (const user2movie of user2FavoriteMovieIDs.favoriteMovies) {
-                    if (user1movie.imdbid === user2movie.imdbid) {
-                        commonFavoriteMovieIDs.push(user1movie)
-                        
-                        break
-                    }
-                }
-            }
-        }
-
-        setCommonFavoriteMovieIDs(commonFavoriteMovieIDs);
-    }
-
-    // "Initialiserer" getCommonFavoriteMoviesUsers()
-    useEffect(() => {
-        getCommonFavoriteMoviesForUsers(loggedInUser, slug)
-    }, [slug])
-
-
-    // "Initialiserer" getMoviesData() for å hente alle filmer, og bruker "felles favorittfilmer" listen
-    useEffect(() => {
-        getMoviesData(commonFavoriteMovieIDs)
-        .then(data => {
-            setcommonFavoriteMoviesData(data)
-        })
-    }, [commonFavoriteMovieIDs])
 
 
     /* **************************** */
@@ -180,15 +139,7 @@ export default function Dashboard( {onLogout}) {
         <section>
             <h3>Forslag for {loggedInUser} og {slug}</h3>
             <CommonWishes user1={loggedInUser} user2={slug}/>
-            <section>
-                <h2>Go safe!</h2>
-                {commonFavoriteMoviesData.length > 1 || commonFavoriteMoviesData.length == 0
-                ? (<p>Dere har {commonFavoriteMoviesData.length} filmer felles i favorittlisten deres.</p>) 
-                : <p>Dere har {commonFavoriteMoviesData.length} film felles i favorittlisten deres.</p>
-                }
-                {commonFavoriteMoviesData?.map((movie, index) => 
-                <MovieCard key={index} movie={movie} className="favoritesDash"/>)}
-            </section>
+            <CommonFavories user1={loggedInUser} user2={slug}/>
             <section>
                 <h2>Utforsk!</h2>
                 <p>Dere liker begge disse sjangerne. Sjekk hvilke filmer som finnes å velge mellom:</p>
