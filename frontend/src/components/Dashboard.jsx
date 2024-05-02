@@ -292,9 +292,6 @@ export default function Dashboard( {onLogout}) {
                     </li>
                 </ul>
             </section>
-            
-            <Link to="/"><button onClick={handlelogout}>logout</button></Link>
-            <h2>hællæ på dæ {loggedInUser}</h2>
         </section>
         
     )

@@ -23,10 +23,7 @@ function App() {
     localStorage.setItem('LoggedInUser', JSON.stringify(username));
     setIsLoggedIn(true)
   }
-  const handleLogout = () => {
-    localStorage.removeItem('LoggedInUser');
-    setIsLoggedIn(false);
-  };
+  
   return (
     <Layout>
       <Routes>

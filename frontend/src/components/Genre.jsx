@@ -1,4 +1,4 @@
-import MovieCard from "./MovieCard"
+import MovieCard from "./Moviecard"
 import { useState } from "react"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
