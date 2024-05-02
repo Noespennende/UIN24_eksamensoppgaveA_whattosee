@@ -6,7 +6,6 @@ export async function fetchAllMovies(){
         imdbid,
         "genre": genre->genretitle
     }`)
-    console.log(data)
      return data
 }
 
