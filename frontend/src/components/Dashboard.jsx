@@ -7,7 +7,7 @@ import { apiClient } from "../../imdbapi/apiClient";
 import { getMoviesData } from "../../imdbapi/apiServices";
 import CommonWishes from "./CommonWishes";
 
-export default function Dashboard( {onLogout}) {
+export default function Dashboard() {
     
     const {slug} = useParams()
 
@@ -15,9 +15,7 @@ export default function Dashboard( {onLogout}) {
     const[users,setUsers] = useState([])
     const loggedInUser = JSON.parse(localStorage.getItem('LoggedInUser'))
 
-    const handlelogout =() =>{
-        onLogout()
-    }
+    
 
     useEffect(() => {
         const fetchData = async () => {

@@ -17,7 +17,7 @@ export default function NavBar({LoggedInUser}){
                     <ul>               
                         <li><Link to="/">Hva skal jeg Se</Link></li>
                         <li><Link to="/genres">Bla igjennom sjangere</Link></li>
-                        <li><Link to="/Dashboard/:slug">{LoggedInUser}</Link></li>
+                        <li><Link to={`/Dashboard/${LoggedInUser}`}>{LoggedInUser}</Link></li>
                         <Link to={"/"} onClick={handleLogout}>Logg ut</Link>
                     </ul>
                 </nav>
