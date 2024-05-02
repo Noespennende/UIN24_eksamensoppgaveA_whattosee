@@ -46,45 +46,34 @@ export default function Dashboard( {onLogout}) {
 
         for(const user1movie of user1Wish.wishlist){
             for(const user2movie of user2Fav.favoriteMovies){
-                //console.log("user1 ", user1movie.imdbid)
-                //console.log("user2 ", user2movie.imdbid)
                 if(user1movie.imdbid === user2movie.imdbid){
                     user2WishMovieIDs.push(user1movie)
-                    console.log("hei jeg heter nr 1: ", user2)
                     break
                 }
                 
             }
         }
+
         for(const user1movieFav of user1Fav.favoriteMovies){
-            for(const user2movieWish of user2Wish.wishlist){
-                //console.log("user1fav: ", user1movieFav.imdbid)
-                //console.log("user2wish: ", user2movieWish.imdbid)           
+            for(const user2movieWish of user2Wish.wishlist){           
                 if(user1movieFav.imdbid === user2movieWish.imdbid){
-                   console.log("jeg heter: ", user1)
                     user1WishMovieIDs.push(user1movieFav)
                     
                     break
                 }
             }
         }
+
         setMovieIDsUser1WishVsUser2Fav(user1WishMovieIDs)
         setMovieIDsUser2WishVsUser1Fav(user2WishMovieIDs)
-        movieIDsUser1WishVsUser2Fav.map(movie => {
-            console.log("test imdblist", movie)
-        })
-
-        user2WishMovieIDs.map((movie) => {
-            console.log("test personlist ", movie)
-        })
     }
 
+    // "Initialiserer" getCommonMoviesFromWishAndFav()
     useEffect(() =>{
-        getCommonMoviesFromWishAndFav(loggedInUser, slug)
-        
+        getCommonMoviesFromWishAndFav(loggedInUser, slug)   
     }, [slug])
 
-    // useEffect for bruker1 sin ønskeliste mot bruker2 sin favorittliste
+    /// "Initialiserer" getMoviesData() for bruker1 sin ønskeliste mot bruker2 sin favorittliste
     useEffect(() => {
         getMoviesData(movieIDsUser1WishVsUser2Fav)
         .then(data => {
@@ -92,7 +81,7 @@ export default function Dashboard( {onLogout}) {
         })
     }, [movieIDsUser1WishVsUser2Fav])
     
-    // useEffect for bruker2 sin ønskeliste mot bruker1 sin favorittliste
+    // "Initialiserer" getMoviesdata() for bruker2 sin ønskeliste mot bruker1 sin favorittliste
     useEffect(() => {
         getMoviesData(movieIDsUser2WishVsUser1Fav)
         .then(data => {
@@ -127,12 +116,12 @@ export default function Dashboard( {onLogout}) {
         setCommonWishlistMovieIDs(commonWishlistMovieIDs);
     }
 
-    // Tar i bruk metoden getCommonWishlistMoviesForUsers()
+    // "Initialiserer" getCommonWishlistMovieIDsForUsers()
     useEffect(() => {
         getCommonWishlistMovieIDsForUsers(loggedInUser, slug)
     }, [slug])
 
-    // Tar i bruk funksjonen getMoviesData() for å hente alle filmer, og bruker "felles" listen
+    // "Initialiserer" getMoviesData() for å hente alle filmer, og bruker "felles" listen
     useEffect(() => {
         getMoviesData(commonWishlistMovieIDs)
         .then(data => {
@@ -166,19 +155,20 @@ export default function Dashboard( {onLogout}) {
         setCommonFavoriteMovieIDs(commonFavoriteMovieIDs);
     }
 
-    // Tar i bruk metoden getCommonFavoriteMoviesUsers()
+    // "Initialiserer" getCommonFavoriteMoviesUsers()
     useEffect(() => {
         getCommonFavoriteMoviesForUsers(loggedInUser, slug)
     }, [slug])
 
 
-    // Tar i bruk funksjonen getMoviesData() for å hente alle filmer, og bruker "felles favorittfilmer" listen
+    // "Initialiserer" getMoviesData() for å hente alle filmer, og bruker "felles favorittfilmer" listen
     useEffect(() => {
         getMoviesData(commonFavoriteMovieIDs)
         .then(data => {
             setcommonFavoriteMoviesData(data)
         })
     }, [commonFavoriteMovieIDs])
+
 
     /* **************************** */
     /* ** Felles favorittsjangre ** */
@@ -210,10 +200,11 @@ export default function Dashboard( {onLogout}) {
         setCommonFavoriteGenres(commonFavoriteGenres);
     }
 
-    // Tar i bruk metoden getCommonFavoriteMoviesUsers()
+    // "Initialiserer" getCommonFavoriteMoviesUsers()
     useEffect(() => {
         getCommonFavoriteGenresByUsers(loggedInUser, slug)
     }, [slug])
+
 
     /* ************** */
     /* ** API-kall ** */
@@ -238,8 +229,6 @@ export default function Dashboard( {onLogout}) {
         return moviesData
         
     }
-    
-    //console.log(commonFavoriteMoviesData)
 
     return(
         <main>
