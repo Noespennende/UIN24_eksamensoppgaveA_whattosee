@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { fetchUsers } from '../../sanity/services/loginServices'
 import { fetchWishlistMoviesByUser } from "../../sanity/services/userServices"
-import MovieCard from './Moviecard'
+import MovieCard from './MovieCard'
 import { apiClient } from "../../imdbapi/apiClient"
 
 

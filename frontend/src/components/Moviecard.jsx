@@ -3,12 +3,12 @@ import { useState } from "react";
 import { useEffect} from "react";
 import { apiClient } from "../../imdbapi/apiClient";
 
-export default function MovieCard({title, imdbId, className}) {
+export default function MovieCard({movie, className}) {
 
     const [imdbImage, setImdbImage] = useState()
 
-    const fetchImdbData = async(movieId) => {
-        const url = `https://moviesdatabase.p.rapidapi.com/titles/${movieId}`;
+    const fetchImdbData = async() => {
+        const url = `https://moviesdatabase.p.rapidapi.com/titles/${movie.imdbid}`;
         try {
             const response = await fetch(url, apiClient);
             const result = await response.json();
@@ -23,20 +23,20 @@ export default function MovieCard({title, imdbId, className}) {
     }
 
     useEffect(() => {
-        fetchImdbData(imdbId)
-    },[imdbId])
+        fetchImdbData()
+    },[])
 
 
     return (
         <article htmlClass={className}>
-            <Link to={`https://www.imdb.com/title/${imdbId}`}>
+            <Link to={`https://www.imdb.com/title/${movie.imdbid}`}>
                 <picture>
                     <source media="(min-width:300px)" srcSet={imdbImage?.url}/>
                     <img src={imdbImage?.url} alt={imdbImage?.caption}  width="300" height="420"></img>
                 </picture>
             </Link>
-            <Link to={`https://www.imdb.com/title/${imdbId}`}>
-                <h3>{title}</h3>
+            <Link to={`https://www.imdb.com/title/${movie.imdbid}`}>
+                <h3>{movie.movietitle}</h3>
             </Link>
         </article>
         
