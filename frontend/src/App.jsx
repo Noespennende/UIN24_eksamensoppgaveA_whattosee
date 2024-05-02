@@ -30,7 +30,6 @@ function App() {
         <Route index element={<Loginpage onLogin={handleLogin} />}></Route>
         <Route path='/Frontpage/:slug' element={<FrontPage />} />
         <Route path='/Dashboard/:slug' element={<Dashboard />} /> {/* fjerne slug her når sammenligning av brukere i FrontPage er lagd?*/}
-
         <Route path='/genres' element={<Genres/>}/>
         <Route path='/:slug/genre' element={<Genre/>}/>
       </Routes>
