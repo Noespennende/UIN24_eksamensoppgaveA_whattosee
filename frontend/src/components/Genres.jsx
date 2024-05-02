@@ -10,6 +10,7 @@ export default function Genres(){
     const [userGenres, setUserGenres] = useState([])
     const [userId, setUserId] = useState("")
     const loggedInUser = JSON.parse(localStorage.getItem('LoggedInUser'))
+    const [changeHappened, setChangeHappened] = useState(null)
 
     const getUserId = async () => {
         const userIdData = await fetchUserId(loggedInUser)
@@ -27,13 +28,13 @@ export default function Genres(){
     useEffect(() => {
         getUserId()
         getGenreData()
-    },[])
+    },[changeHappened])
 
     return(
         <section>
             <h1>Sjangere</h1>
             <ul>
-                {genreList?.map((genre, index) => <li key={"genre"+index}><GenreCard title={genre.genretitle} genreId={genre.id} url={genre.url} userGenres={(userGenres) ? (userGenres) : ([])} userId={userId} index={index}/></li>)}
+                {genreList?.map((genre, index) => <li key={"genre"+index}><GenreCard title={genre.genretitle} genreId={genre.id} url={genre.url} setChange={setChangeHappened} userGenres={(userGenres) ? (userGenres) : ([])} userId={userId} index={index}/></li>)}
             </ul>
         </section>
     )

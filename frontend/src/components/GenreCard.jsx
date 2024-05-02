@@ -4,19 +4,20 @@ import { RxStarFilled } from "react-icons/rx";
 import { addFavoriteGenreToUser, removeFavoriteGenreromUser } from "../../sanity/services/userServices";
 import { useEffect, useState } from "react";
 
-export default function GenreCard({title, genreId, url, userGenres, userId, index}){
+export default function GenreCard({title, genreId, url, userGenres, userId, index, setChange}){
 
     const handleAddToFavoriteClick = async () => {
         document.getElementById(`addFavorite${index}`).outerHTML = "<p>Lagt til favoritter</p>"
         const result = await addFavoriteGenreToUser(userId, genreId)
-        setChangeHappened(1)
+        setChange({index})
+
         
     }
 
     const handleRemoveFromFavoriteClick = async () => {
         document.getElementById(`removeFavorite${index}`).outerHTML = "<p>Fjernet fra favorites</p>"
         const result = await removeFavoriteGenreromUser(userId, genreId)
-        setChangeHappened(2)
+        setChange({index})
     }
 
     return(

@@ -14,7 +14,7 @@ export default function NavBar({LoggedInUser, setLoggedInUser, setLoggedIn}){
         <nav>
             <Link id="logo" to={`/Frontpage/${LoggedInUser}`}>What to see</Link>
             <ul>               
-                <li><Link to={`/Frontpage/${LoggedInUser}`}>Hva skal jeg Se</Link></li>
+                <li><Link to={`/Frontpage/${LoggedInUser}`}>Hva skal jeg se</Link></li>
                 <li><Link to="/genres">Bla igjennom sjangere</Link></li>
                 <li><p> {LoggedInUser}</p></li>
                 <li><Link to={"/"} onClick={handleLogout}>Logg ut</Link></li>
