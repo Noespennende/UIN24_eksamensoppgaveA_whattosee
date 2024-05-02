@@ -26,45 +26,30 @@ export default function Dashboard( {onLogout}) {
         fetchData();
     }, [loggedInUser])
 
-    const [moviesInWishAndFav, setMoviesInWishAndFav] = useState([])
-    const [commonData, setCommonData] = useState([])
-    const [person, setPerson] = useState([])
-    const [commonDat, setCommonDat] = useState([])
-    
-    useEffect(() => {
-        getMoviesData(moviesInWishAndFav)
-        .then(data => {
-            setCommonData(data)
-            //console.log("test", data)
-            //console.log("halloo", moviesInWishAndFav);
-        })
-    }, [moviesInWishAndFav])
-    
+    /* ************************************************* */
+    /* ** Felles filmer i ønskeliste VS favorittliste ** */
+    /* ************************************************* */
 
-    useEffect(() => {
-        getMoviesData(person)
-        .then(data => {
-            setCommonDat(data)
-            //console.log("test", data)
-            console.log("halloo kommondatt", person);
-        })
-    }, [person])
-
+    const [movieIDsUser1WishVsUser2Fav, setMovieIDsUser1WishVsUser2Fav] = useState([])
+    const [moviesDataUser1WishVsUser2Fav, setMoviesDataUser1WishVsUser2Fav] = useState([])
+    const [movieIDsUser2WishVsUser1Fav, setMovieIDsUser2WishVsUser1Fav] = useState([])
+    const [moviesDataUser2WishVsUser1Fav, setMoviesDataUser2WishVsUser1Fav] = useState([])
+    
     const getCommonMoviesFromWishAndFav = async (user1, user2) => {
         const user1Wish = await fetchWishlistMoviesByUser(user1)
-        const user2Fav = await fetchFavoriteMoviesByUser(user2)
-        const user1Fav = await fetchFavoriteMoviesByUser(user1)
         const user2Wish = await fetchWishlistMoviesByUser(user2)
-
-        const imdbList = []
-        const personList = []
+        const user1Fav = await fetchFavoriteMoviesByUser(user1)
+        const user2Fav = await fetchFavoriteMoviesByUser(user2)
+        
+        const user1WishMovieIDs = []
+        const user2WishMovieIDs = []
 
         for(const user1movie of user1Wish.wishlist){
             for(const user2movie of user2Fav.favoriteMovies){
                 //console.log("user1 ", user1movie.imdbid)
                 //console.log("user2 ", user2movie.imdbid)
                 if(user1movie.imdbid === user2movie.imdbid){
-                    personList.push(user1movie)
+                    user2WishMovieIDs.push(user1movie)
                     console.log("hei jeg heter nr 1: ", user2)
                     break
                 }
@@ -77,20 +62,19 @@ export default function Dashboard( {onLogout}) {
                 //console.log("user2wish: ", user2movieWish.imdbid)           
                 if(user1movieFav.imdbid === user2movieWish.imdbid){
                    console.log("jeg heter: ", user1)
-                    imdbList.push(user1movieFav)
-                    
+                    user1WishMovieIDs.push(user1movieFav)
                     
                     break
                 }
             }
         }
-        setMoviesInWishAndFav(imdbList)
-        setPerson(personList)
-        moviesInWishAndFav.map(movie => {
+        setMovieIDsUser1WishVsUser2Fav(user1WishMovieIDs)
+        setMovieIDsUser2WishVsUser1Fav(user2WishMovieIDs)
+        movieIDsUser1WishVsUser2Fav.map(movie => {
             console.log("test imdblist", movie)
         })
 
-        personList.map((movie) => {
+        user2WishMovieIDs.map((movie) => {
             console.log("test personlist ", movie)
         })
     }
@@ -99,76 +83,91 @@ export default function Dashboard( {onLogout}) {
         getCommonMoviesFromWishAndFav(loggedInUser, slug)
         
     }, [slug])
- 
+
+    // useEffect for bruker1 sin ønskeliste mot bruker2 sin favorittliste
+    useEffect(() => {
+        getMoviesData(movieIDsUser1WishVsUser2Fav)
+        .then(data => {
+            setMoviesDataUser1WishVsUser2Fav(data)
+            //console.log("test", data)
+            //console.log("halloo", moviesInWishAndFav);
+        })
+    }, [movieIDsUser1WishVsUser2Fav])
     
+    // useEffect for bruker2 sin ønskeliste mot bruker1 sin favorittliste
+    useEffect(() => {
+        getMoviesData(movieIDsUser2WishVsUser1Fav)
+        .then(data => {
+            setMoviesDataUser2WishVsUser1Fav(data)
+            //console.log("test", data)
+            console.log("halloo kommondatt", movieIDsUser2WishVsUser1Fav);
+        })
+    }, [movieIDsUser2WishVsUser1Fav])
+ 
 
     /* *********************** */
     /* ** Felles ønskeliste ** */
     /* *********************** */
 
-    const [commonWishlist, setCommonWishlist] = useState([])
-    const [commonWishlistData, setCommonWishlistData] = useState([])
+    const [commonWishlistMovieIDs, setCommonWishlistMovieIDs] = useState([])
+    const [commonWishlistMoviesData, setCommonWishlistMoviesData] = useState([])
 
     // Sanity fetch -> setter commonWishlist -> alle filmer som to brukere har til felles
-    const getCommonWishlistMoviesForUsers = async (user1, user2) => {
+    const getCommonWishlistMovieIDsForUsers = async (user1, user2) => {
         const user1Wishlist = await fetchWishlistMoviesByUser(user1)
         const user2Wishlist = await fetchWishlistMoviesByUser(user2)
 
-        const commonWishlistData = []
+        const commonWishlistMovieIDs = []
 
         for (const user1movie of user1Wishlist.wishlist) {
             for (const user2movie of user2Wishlist.wishlist) {
                 if (user1movie.imdbid === user2movie.imdbid) {
-                    commonWishlistData.push(user1movie)
+                    commonWishlistMovieIDs.push(user1movie)
                     break
                 }
             }
         }
 
-        setCommonWishlist(commonWishlistData);
+        setCommonWishlistMovieIDs(commonWishlistMovieIDs);
     }
 
     // Tar i bruk metoden getCommonWishlistMoviesForUsers()
     useEffect(() => {
-        getCommonWishlistMoviesForUsers(loggedInUser, slug)
+        getCommonWishlistMovieIDsForUsers(loggedInUser, slug)
     }, [slug])
 
-
-    
     // Tar i bruk funksjonen getMoviesData() for å hente alle filmer, og bruker "felles" listen
     useEffect(() => {
-        getMoviesData(commonWishlist)
+        getMoviesData(commonWishlistMovieIDs)
         .then(data => {
-            setCommonWishlistData(data)
-            //console.log("test", data)
-            //console.log("halloo", commonWishlistData);
+            setCommonWishlistMoviesData(data)
         })
-    }, [commonWishlist])
+    }, [commonWishlistMovieIDs])
 
     /* *************************** */
     /* ** Felles favorittfilmer ** */
     /* *************************** */
 
-    const [commonFavoriteMovies, setCommonFavoriteMovies] = useState([])
+    const [commonFavoriteMovieIDs, setCommonFavoriteMovieIDs] = useState([])
     const [commonFavoriteMoviesData, setcommonFavoriteMoviesData] = useState([])
 
     // Sanity fetch -> setter commonFavoriteMovies -> alle filmer som to brukere har som favoritt
     const getCommonFavoriteMoviesForUsers = async (user1, user2) => {
-        const user1FavoriteMovies = await fetchFavoriteMoviesByUser(user1)
-        const user2FavoriteMovies = await fetchFavoriteMoviesByUser(user2)
+        const user1FavoriteMovieIDs = await fetchFavoriteMoviesByUser(user1)
+        const user2FavoriteMovieIDs = await fetchFavoriteMoviesByUser(user2)
 
-        const commonFavoriteMoviesData = []
+        const commonFavoriteMovieIDs = []
 
-        for (const user1movie of user1FavoriteMovies.favoriteMovies) {
-            for (const user2movie of user2FavoriteMovies.favoriteMovies) {
+        for (const user1movie of user1FavoriteMovieIDs.favoriteMovies) {
+            for (const user2movie of user2FavoriteMovieIDs.favoriteMovies) {
                 if (user1movie.imdbid === user2movie.imdbid) {
-                    commonFavoriteMoviesData.push(user1movie)
+                    commonFavoriteMovieIDs.push(user1movie)
                     
                     break
                 }
             }
         }
-        setCommonFavoriteMovies(commonFavoriteMoviesData);
+        setCommonFavoriteMovieIDs(commonFavoriteMovieIDs);
     }
 
     // Tar i bruk metoden getCommonFavoriteMoviesUsers()
@@ -179,12 +178,12 @@ export default function Dashboard( {onLogout}) {
 
     // Tar i bruk funksjonen getMoviesData() for å hente alle filmer, og bruker "felles favorittfilmer" listen
     useEffect(() => {
-        getMoviesData(commonFavoriteMovies)
+        getMoviesData(commonFavoriteMovieIDs)
         .then(data => {
             setcommonFavoriteMoviesData(data)
             //console.log("Felles favoritter: ", commonFavoriteMovies)
         })
-    }, [commonFavoriteMovies])
+    }, [commonFavoriteMovieIDs])
 
     /* **************************** */
     /* ** Felles favorittsjangre ** */
@@ -249,16 +248,14 @@ export default function Dashboard( {onLogout}) {
 
     return(
         <main>
-            {users.map((user, index) => (
-            <h1 key={index}>Forslag til {user.username}</h1>))}
             <h3>Forslag for {loggedInUser} og {slug}</h3>
             <section>
                 <h2>Catch up!</h2>
-                {commonWishlist.length > 1 
-                ? (<p>Dere har {commonWishlist.length} filmer felles i ønskelisten deres.</p>) 
-                : <p>Dere har {commonWishlist.length} film felles i ønskelisten deres.</p>
+                {commonWishlistMovieIDs.length > 1 
+                ? (<p>Dere har {commonWishlistMovieIDs.length} filmer felles i ønskelisten deres.</p>) 
+                : <p>Dere har {commonWishlistMovieIDs.length} film felles i ønskelisten deres.</p>
                 }
-                {commonWishlistData?.map((movie, index) => 
+                {commonWishlistMoviesData?.map((movie, index) => 
                 <DashMovieCard key={index} movie={movie} />)}
             </section>
             <section>
@@ -283,7 +280,7 @@ export default function Dashboard( {onLogout}) {
                 <h2>felles i ønsk of fav</h2>
                 <p>sjekk ut dette</p>
                 <ul><li> <p>{slug} sine filmer</p>
-                     {commonData?.map((movie, index)=>
+                     {moviesDataUser1WishVsUser2Fav?.map((movie, index)=>
                        
                     <DashMovieCard key={index} movie={movie}/>
                         
@@ -291,7 +288,7 @@ export default function Dashboard( {onLogout}) {
                      </li>
                      <li> 
                         <p>{loggedInUser} sine filmer</p>
-                    {commonDat?.map((movie, index) =>
+                    {moviesDataUser2WishVsUser1Fav?.map((movie, index) =>
                         <DashMovieCard key={index} movie={movie}/>
                     )}
                     </li>
