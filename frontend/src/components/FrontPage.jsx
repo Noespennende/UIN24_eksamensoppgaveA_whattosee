@@ -6,7 +6,6 @@ import MovieCard from './MovieCard'
 import { apiClient } from "../../imdbapi/apiClient"
 
 
-
 export default function FrontPage({ onLogout, imdbId }) {
     const { slug } = useParams()
     const [users, setUsers] = useState([])
@@ -14,7 +13,6 @@ export default function FrontPage({ onLogout, imdbId }) {
     const [wishlist, setWishlist] = useState([])
     const wishlistArray = []
     const [imdbImage, setImdbImage] = useState()
-    const [movielist, setMovieList] = useState()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -37,7 +35,6 @@ export default function FrontPage({ onLogout, imdbId }) {
 
     useEffect(() => {
         getWishlistMovies(slug)
-        console.log("ferdig wishlist?", wishlistArray)
     }, [slug])
 
     console.log("wishlist:", wishlist)
