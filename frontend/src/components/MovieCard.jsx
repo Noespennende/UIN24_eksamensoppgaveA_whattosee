@@ -11,7 +11,6 @@ export default function MovieCard({movie, className}) {
         caption: movie.primaryImage.caption.plainText
     })
 
-
     return (
         <article className={className}>
             <Link to={`https://www.imdb.com/title/${movie.imdbid}`}>
@@ -21,7 +20,7 @@ export default function MovieCard({movie, className}) {
                 </picture>
             </Link>
             <Link to={`https://www.imdb.com/title/${movie.imdbid}`}>
-                <h3>{movie.movietitle}</h3>
+                <h3>{movie.titleText.text}</h3>
             </Link>
         </article>
         

@@ -53,7 +53,7 @@ export default function FrontPage({ onLogout, loggedInUser}) {
         <>
             <h1>Hei, {slug}. Velkommen til forsiden din!</h1>
             <section id="skal_se">
-                <h3>Filmer jeg skal se!</h3>
+                <h2>Filmer jeg skal se!</h2>
                 <p>Disse filmene ligger i ønskelisten din:</p>
                 {apiData?.map((movie, index) => (
                     <MovieCard key={index} movie={movie} className={"frontPageMc"} />))}

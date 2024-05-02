@@ -25,10 +25,10 @@ export default function Loginpage({ onLogin }) {
     return (
         <>
             <h1>Hvem skal se idag?</h1>
+            <h2>Velg bruker</h2>
             <ul>
-                <p>Velg Bruker</p>
                 {users.map((user, index) => (
-                    <Link to={`/Frontpage/${user.username}`} key={index}><button onClick={() => handleLogin(user.username)}>{user.username}</button></Link>
+                    <li key={"brukere"+index}><Link to={`/Frontpage/${user.username}`}><button onClick={() => handleLogin(user.username)}>{user.username}</button></Link></li>
                 ))}
             </ul>
 
