@@ -50,13 +50,6 @@ export default function FrontPage({ onLogout, imdbId }) {
         try {
             const response = await fetch(url, apiClient)
             const result = await response.json()
-            console.log("IMDb API Response:", result); // Log the response
-            setImdbImage(
-                {
-                    url: result.results.primaryImage.url,
-                    caption: result.results.primaryImage.caption.plainText,
-                })
-
         } catch (error) {
             console.error(error)
         }
@@ -69,7 +62,6 @@ export default function FrontPage({ onLogout, imdbId }) {
 
     return (
         <>
-            <NavBar LoggedInUser={loggedInUser} />
             <h1>Hei, {slug}. Velkommen til forsiden din!</h1>
             <Link to="/"><button onClick={handlelogout}>logout</button></Link>
             <section id="skal_se">
