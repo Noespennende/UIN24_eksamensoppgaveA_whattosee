@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
-import NavBar from './NavBar'
 import { Link, useParams } from 'react-router-dom'
 import { fetchUsers } from '../../sanity/services/loginServices'
 import { fetchWishlistMoviesByUser } from "../../sanity/services/userServices"
-import MovieCard from './MovieCard'
-import DashMovieCard from './DashMovieCard'
+import MovieCard from './Moviecard'
 import { apiClient } from "../../imdbapi/apiClient"
-import { fetchAllMovies } from '../../sanity/services/movieServices'
+
 
 
 export default function FrontPage({ onLogout, imdbId }) {
@@ -63,7 +61,6 @@ export default function FrontPage({ onLogout, imdbId }) {
     return (
         <>
             <h1>Hei, {slug}. Velkommen til forsiden din!</h1>
-            <Link to="/"><button onClick={handlelogout}>logout</button></Link>
             <section id="skal_se">
                 <h3>Filmer jeg skal se!</h3>
                 <p>Disse filmene ligger i ønskelisten din:</p>
