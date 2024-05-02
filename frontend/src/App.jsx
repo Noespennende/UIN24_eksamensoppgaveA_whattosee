@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import Layout from './components/Layout'
 import Genre from './components/Genre'
 import Genres from './components/Genres'
+import { Navigate } from 'react-router-dom'
 
 
 function App() {
@@ -28,15 +29,18 @@ function App() {
   }
   
   return (
-    <Layout setLoggedIn={setIsLoggedIn} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}>
-      <Routes>
-        <Route index element={<Loginpage onLogin={handleLogin} setLoggedIn={setIsLoggedIn} />}></Route>
-        <Route path='/Frontpage/:slug' element={<FrontPage loggedInUser={loggedInUser}/>} />
-        <Route path='/Dashboard/:slug' element={<Dashboard />} /> {/* fjerne slug her når sammenligning av brukere i FrontPage er lagd?*/}
-        <Route path='/genres' element={<Genres/>}/>
-        <Route path='/:slug/genre' element={<Genre/>}/>
-      </Routes>
-    </Layout>
+    <>
+      <Layout setLoggedIn={setIsLoggedIn} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}>
+        <Routes>
+          <Route index element={<Loginpage onLogin={handleLogin} setLoggedIn={setIsLoggedIn} />}></Route>
+          <Route path='/Frontpage/:slug' element={<FrontPage loggedInUser={loggedInUser}/>} />
+          <Route path='/Dashboard/:slug' element={<Dashboard />} /> {/* fjerne slug her når sammenligning av brukere i FrontPage er lagd?*/}
+          <Route path='/genres' element={<Genres/>}/>
+          <Route path='/:slug/genre' element={<Genre/>}/>
+        </Routes>
+      </Layout>
+    </>
+
   )
 }
 

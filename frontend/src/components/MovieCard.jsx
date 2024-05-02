@@ -5,10 +5,12 @@ import { apiClient } from "../../imdbapi/apiClient";
 
 export default function MovieCard({movie, className}) {
 
+
     const [imdbImage] = useState({
         url: movie.primaryImage.url,
         caption: movie.primaryImage.caption.plainText
     })
+
 
     return (
         <article className={className}>

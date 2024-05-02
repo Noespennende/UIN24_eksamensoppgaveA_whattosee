@@ -4,14 +4,16 @@ import { fetchUsers } from '../../sanity/services/loginServices'
 import { fetchWishlistMoviesByUser } from "../../sanity/services/userServices"
 import MovieCard from './MovieCard'
 import { apiClient } from "../../imdbapi/apiClient"
+import { getMoviesData } from "../../imdbapi/apiServices"
 
 
-export default function FrontPage({ onLogout, imdbId, loggedInUser}) {
+export default function FrontPage({ onLogout, loggedInUser}) {
     const { slug } = useParams()
     const [users, setUsers] = useState([])
-    const [wishlist, setWishlist] = useState([])
-    const wishlistArray = []
     const [imdbImage, setImdbImage] = useState()
+    const [apiData, setApiData] = useState([])
+
+    const [movieList, setMovieList] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,30 +32,21 @@ export default function FrontPage({ onLogout, imdbId, loggedInUser}) {
 
     const getWishlistMovies = async (slug) => {
         const movies = await fetchWishlistMoviesByUser(slug)
-        setWishlist(movies.wishlist)
+        setMovieList(movies.wishlist)
     }
 
     useEffect(() => {
         getWishlistMovies(slug)
     }, [slug])
 
-
-
-
-    const fetchImdbData = async (movieId) => {
-        const url = `https://moviesdatabase.p.rapidapi.com/titles/${movieId}`;
-        try {
-            const response = await fetch(url, apiClient)
-            const result = await response.json()
-        } catch (error) {
-            console.error(error)
-        }
-    }
-
     useEffect(() => {
-        fetchImdbData(imdbId)
-        console.log("logged inn: " + loggedInUser)
-    }, [imdbId])
+        getMoviesData(movieList)
+        .then(data => {
+            setApiData(data)
+        })
+    }, [movieList])
+
+
 
 
     return (
@@ -62,7 +55,7 @@ export default function FrontPage({ onLogout, imdbId, loggedInUser}) {
             <section id="skal_se">
                 <h3>Filmer jeg skal se!</h3>
                 <p>Disse filmene ligger i ønskelisten din:</p>
-                {wishlist?.map((movie, index) => (
+                {apiData?.map((movie, index) => (
                     <MovieCard key={index} movie={movie} className={"frontPageMc"} />))}
             </section>
             <article id="se_med">
