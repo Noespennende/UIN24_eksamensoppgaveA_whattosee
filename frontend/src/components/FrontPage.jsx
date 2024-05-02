@@ -6,6 +6,7 @@ import { fetchWishlistMoviesByUser } from "../../sanity/services/userServices"
 import MovieCard from './Moviecard'
 import DashMovieCard from './DashMovieCard'
 import { apiClient } from "../../imdbapi/apiClient"
+import { fetchAllMovies } from '../../sanity/services/movieServices'
 
 
 export default function FrontPage({ onLogout, imdbId }) {
@@ -15,6 +16,7 @@ export default function FrontPage({ onLogout, imdbId }) {
     const [wishlist, setWishlist] = useState([])
     const wishlistArray = []
     const [imdbImage, setImdbImage] = useState()
+    const [movielist, setMovieList] = useState()
 
     useEffect(() => {
         const fetchData = async () => {
