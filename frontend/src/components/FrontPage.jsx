@@ -37,7 +37,7 @@ export default function FrontPage({ onLogout, imdbId }) {
         getWishlistMovies(slug)
     }, [slug])
 
-    console.log("wishlist:", wishlist)
+
 
 
     const fetchImdbData = async (movieId) => {

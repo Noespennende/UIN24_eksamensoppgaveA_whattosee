@@ -148,9 +148,8 @@ export default function Dashboard( {onLogout}) {
     // Sanity fetch -> setter commonFavoriteMovies -> alle filmer som to brukere har som favoritt
     const getCommonFavoriteGenresByUsers = async (user1, user2) => {
         const user1FavoriteGenres = (await fetchFavoriteGenreByUser(user1))[0].favorites
-        //const user1FavoriteGenres = await fetchFavoriteGenresByUser(user1)
         const user2FavoriteGenres = (await fetchFavoriteGenreByUser(user2))[0].favorites
-        //const user2FavoriteGenres = await fetchFavoriteGenresByUser(user2)
+        
 
         console.log("user1 ", user1FavoriteGenres)
         const commonFavoriteGenres = []

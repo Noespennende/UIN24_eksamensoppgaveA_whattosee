@@ -12,7 +12,6 @@ export default function Loginpage({ onLogin }) {
         const fetchData = async () => {
             const oneUser = await fetchUsers();
             setUsers(oneUser);
-            console.log(oneUser)
         }
         fetchData();
     }, [])
