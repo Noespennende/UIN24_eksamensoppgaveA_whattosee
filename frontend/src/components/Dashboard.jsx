@@ -8,6 +8,7 @@ import { getMoviesData } from "../../imdbapi/apiServices";
 import CommonWishes from "./CommonWishes";
 import MovieCard from "./MovieCard";
 import CommonFavories from "./CommonFavorites";
+import CommonGenres from "./CommonGenres";
 
 export default function Dashboard( {onLogout}) {
     
@@ -103,52 +104,12 @@ export default function Dashboard( {onLogout}) {
     /* ** Felles favorittsjangre ** */
     /* **************************** */
 
-    const [commonFavoriteGenres, setCommonFavoriteGenres] = useState([])
-
-    // Sanity fetch -> setter commonFavoriteMovies -> alle filmer som to brukere har som favoritt
-    const getCommonFavoriteGenresByUsers = async (user1, user2) => {
-        const user1FavoriteGenres = (await fetchFavoriteGenresByUser(user1))
-        const user2FavoriteGenres = (await fetchFavoriteGenresByUser(user2))
-        
-
-        console.log("user1 ", user1FavoriteGenres)
-        const commonFavoriteGenres = []
-
-        if (user1FavoriteGenres && user2FavoriteGenres) {
-            // Prøvde sammenligne ._id, men da kom det en ikke-felles fra user1genre med i listen
-            for (const user1genre of user1FavoriteGenres.favoriteGenres) {
-                for (const user2genre of user2FavoriteGenres.favoriteGenres) {
-                    if (user1genre.genretitle === user2genre.genretitle) {
-                        commonFavoriteGenres.push(user1genre)
-                        
-                        break
-                    }
-                }
-            }
-        }
-
-        setCommonFavoriteGenres(commonFavoriteGenres);
-    }
-
-    // "Initialiserer" getCommonFavoriteMoviesUsers()
-    useEffect(() => {
-        getCommonFavoriteGenresByUsers(loggedInUser, slug)
-    }, [slug])
-
     return(
         <section>
             <h3>Forslag for {loggedInUser} og {slug}</h3>
             <CommonWishes user1={loggedInUser} user2={slug}/>
             <CommonFavories user1={loggedInUser} user2={slug}/>
-            <section>
-                <h2>Utforsk!</h2>
-                <p>Dere liker begge disse sjangerne. Sjekk hvilke filmer som finnes å velge mellom:</p>
-                <ul>
-                    {commonFavoriteGenres?.map((genre, index) =>
-                    <li key={index}><Link to={`/${genre.url}/genre`}>{genre.genretitle}</Link></li>
-                    )}
-                </ul>
-            </section>
+            <CommonGenres user1={loggedInUser} user2={slug}/>
             <section>
                 <h2>felles i ønsk of fav</h2>
                 <p>sjekk ut dette</p>
