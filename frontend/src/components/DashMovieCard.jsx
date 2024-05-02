@@ -1,12 +1,22 @@
+import { useState, useEffect } from "react"
+import { apiClient } from "../../imdbapi/apiClient";
 
 export default function DashMovieCard({movie}) {
+
+
+    const [imdbImage] = useState({
+        url: movie.primaryImage.url,
+        caption: movie.primaryImage.caption.plainText
+    })
 
     if (movie) {
         return (
             <article>
-                <p>{movie.id}</p>
-                <p>{movie.originalTitleText.text}</p>
-                <img src={movie.primaryImage.url} alt={`${movie.originalTitleText.text} cover image`}/>
+                <picture>
+                    <source media="(min-width:300px)" srcSet={imdbImage?.url}/>
+                    <img src={imdbImage?.url} alt={imdbImage?.caption}  width="300" height="420"></img>
+                </picture>
+                <p>{`${movie.originalTitleText.text} (${movie.releaseYear.year})`}</p>
                 
             </article>
             
