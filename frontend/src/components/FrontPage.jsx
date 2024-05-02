@@ -3,10 +3,8 @@ import NavBar from './NavBar'
 import { Link, useParams } from 'react-router-dom'
 import { fetchUsers } from '../../sanity/services/loginServices'
 import { fetchWishlistMoviesByUser } from "../../sanity/services/userServices"
-import MovieCard from './Moviecard'
-import DashMovieCard from './DashMovieCard'
+import MovieCard from './MovieCard'
 import { apiClient } from "../../imdbapi/apiClient"
-import { fetchAllMovies } from '../../sanity/services/movieServices'
 
 
 export default function FrontPage({ onLogout, imdbId }) {
@@ -16,7 +14,6 @@ export default function FrontPage({ onLogout, imdbId }) {
     const [wishlist, setWishlist] = useState([])
     const wishlistArray = []
     const [imdbImage, setImdbImage] = useState()
-    const [movielist, setMovieList] = useState()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,7 +36,6 @@ export default function FrontPage({ onLogout, imdbId }) {
 
     useEffect(() => {
         getWishlistMovies(slug)
-        console.log("ferdig wishlist?", wishlistArray)
     }, [slug])
 
     console.log("wishlist:", wishlist)
