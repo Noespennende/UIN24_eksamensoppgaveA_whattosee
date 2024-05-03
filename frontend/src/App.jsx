@@ -39,7 +39,7 @@ function App() {
           <Route path='/:slug/genre' element={<Genre/>}/>
         </Routes>
       </Layout>
-      {loggedInUser ? <Navigate to={`/dashboard/${loggedInUser}`} replace /> : <Navigate to="/"/>}
+     
 
     </>
 

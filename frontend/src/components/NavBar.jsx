@@ -2,11 +2,11 @@ import { Link } from "react-router-dom"
 import "../styles.css"
 import { useState } from "react";
 
-export default function NavBar({LoggedInUser, setLoggedInUser, setLoggedIn}){
+export default function NavBar({LoggedInUser, setLoggedInUser, setLoggedInn}){
 
     const handleLogout = () => {
         localStorage.removeItem('LoggedInUser');
-        setLoggedIn(false);
+        setLoggedInn(false);
         setLoggedInUser(null)
       };
     return(
