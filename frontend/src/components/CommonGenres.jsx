@@ -45,7 +45,7 @@ export default function CommonGenres({user1, user2}) {
                     {commonFavoriteGenres?.map((genre, index) =>
                     <li key={index}><Link to={`/${genre.url}/genre`}>{genre.genretitle}</Link></li>
                     )}
-                </ul> </>) : (<p>Dere har ingen felles favorittsjangere :C</p>)}
+                </ul> </>) : (<p>Dere har ingen felles favorittsjangere <span role="img" aria-label="Trist emoji">😞</span></p>)}
             </section>
     )
 }
