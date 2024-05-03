@@ -12,6 +12,8 @@ export default function NavBar({LoggedInUser, setLoggedInUser, setLoggedInn}){
     return(
         <>
         <nav>
+        {LoggedInUser ? (
+            <>
             <Link id="logo" to={`/Frontpage/${LoggedInUser}`}>What to see</Link>
             <ul>               
                 <li><Link to={`/Frontpage/${LoggedInUser}`}>Hva skal jeg se</Link></li>
@@ -19,6 +21,8 @@ export default function NavBar({LoggedInUser, setLoggedInUser, setLoggedInn}){
                 <li><p> {LoggedInUser}</p></li>
                 <li><Link to={"/"} onClick={handleLogout}>Logg ut</Link></li>
             </ul>
+            </>
+        ): null }
         </nav>
         </>
     )

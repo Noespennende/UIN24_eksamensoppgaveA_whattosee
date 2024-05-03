@@ -17,7 +17,6 @@ function App() {
 
   useEffect(() => {
     setLoggedInUser(localStorage.getItem('LoggedInUser')?.replaceAll('"', ''))
-    console.log(user)
     if (loggedInUser)
       setIsLoggedIn(true)
   }, [loggedIn])
@@ -39,8 +38,7 @@ function App() {
           <Route path='/:slug/genre' element={<Genre/>}/>
         </Routes>
       </Layout>
-     
-
+      {loggedInUser ? <Navigate to={`/Frontpage/${loggedInUser}`} replace /> : <Navigate to="/"/>}
     </>
 
   )
