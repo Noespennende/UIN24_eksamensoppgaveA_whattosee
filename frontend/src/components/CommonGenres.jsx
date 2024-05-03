@@ -39,12 +39,13 @@ export default function CommonGenres({user1, user2}) {
     return (
         <section>
                 <h2>Utforsk!</h2>
+                {(commonFavoriteGenres.length > 0) ? (<>
                 <p>Dere liker begge disse sjangerne. Sjekk hvilke filmer som finnes å velge mellom:</p>
                 <ul>
                     {commonFavoriteGenres?.map((genre, index) =>
                     <li key={index}><Link to={`/${genre.url}/genre`}>{genre.genretitle}</Link></li>
                     )}
-                </ul>
+                </ul> </>) : (<p>Dere har ingen felles favorittsjangere :C</p>)}
             </section>
     )
 }
