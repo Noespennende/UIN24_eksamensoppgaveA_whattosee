@@ -31,14 +31,17 @@ function App() {
     <>
       <Layout setLoggedIn={setIsLoggedIn} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}>
         <Routes>
-          <Route index element={<Loginpage onLogin={handleLogin} setLoggedIn={setIsLoggedIn} />}></Route>
+          <Route index element={loggedInUser 
+            ? <Navigate to={`/Frontpage/${loggedInUser}`} replace /> 
+            : <Loginpage onLogin={handleLogin} setLoggedIn={setIsLoggedIn} />
+            }/>
           <Route path='/Frontpage/:slug' element={<FrontPage loggedInUser={loggedInUser}/>} />
           <Route path='/Dashboard/:slug' element={<Dashboard />} /> {/* fjerne slug her når sammenligning av brukere i FrontPage er lagd?*/}
           <Route path='/genres' element={<Genres/>}/>
           <Route path='/:slug/genre' element={<Genre/>}/>
         </Routes>
       </Layout>
-      {loggedInUser ? <Navigate to={`/Frontpage/${loggedInUser}`} replace /> : <Navigate to="/"/>}
+      {loggedInUser ? null : <Navigate to="/" replace />}
     </>
 
   )
