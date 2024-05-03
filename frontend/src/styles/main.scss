@@ -1,0 +1,139 @@
+$navcolor: #21243e;
+$colorWhite: #ffff;
+$colorGrey: #dbdbdb;
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    width: 100%;
+
+    #root {
+        padding: 0;
+        margin: 0;
+        max-width: 100%;
+
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: $navcolor;
+            width: 100%;
+            margin: 0rem 1rem 0rem 0rem;
+
+            nav {
+                display: flex;
+                gap: 1rem;
+                width: 100%;
+                margin: 1.5rem;
+                padding: 0.5rem 0.5rem 0.5rem 0rem;
+
+                #logo {
+                    color: $colorWhite;
+                    padding-left: 0.5rem;
+                    font-weight: bold;
+                    font-size: x-large;
+                }
+
+                ul {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 1rem;
+
+                    li {
+
+                        p {
+                            color: $colorWhite;
+                            margin: 0;
+
+                        }
+
+                        a {
+                            color: $colorWhite;
+                        }
+                    }
+                }
+            }
+        }
+
+        main {
+            padding-top: 5rem;
+            display: flex;
+            flex-direction: column;
+
+            ul {
+                li {
+                    padding: 0.5rem;
+
+                }
+            }
+
+            section#skal_se {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                align-self: center;
+
+                article {
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+
+            section#se_med {
+                margin: 1rem;
+                padding: 1rem;
+                width: fit-content;
+                align-self: center;
+                background-color: $colorGrey;
+                border-radius: 5px;
+
+
+                ul {
+
+                    li {
+                        padding: 0.5rem;
+                        display: flex;
+                        list-style-type: disc;
+
+                        a {
+                            display: list-item;
+                            margin-left: 1rem;
+                            text-decoration: none;
+
+                        }
+                    }
+                }
+            }
+
+            section {
+                display: flex;
+                flex-direction: column;
+
+                ul {
+                    display: flex;
+                    flex-direction: column;
+
+                    li {
+                        article {
+                            a {
+                                padding: 1rem;
+                            }
+                        }
+                    }
+                }
+            }
+
+            article.mcgenre {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+}
+
+
+
+/// etter 400px i bredde blir nav bar elementene plassert under hverandre
