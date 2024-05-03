@@ -19,25 +19,44 @@ export default function CommonWishVsFav({user1, user2}) {
         const user1WishMovieIDs = []
         const user2WishMovieIDs = []
 
+        // User 1 sin kolleksjon av "mitt ønske og andres favoritt"
         if (user1Wish.wishlist && user2Fav.favoriteMovies) {
-            for(const user1movie of user1Wish.wishlist){
+            for(const user1MovieWish of user1Wish.wishlist){
                 for(const user2movie of user2Fav.favoriteMovies){
-                    if(user1movie.imdbid === user2movie.imdbid){
-                        user2WishMovieIDs.push(user1movie)
-                        break
-                    }
-                    
+                    if(user1MovieWish.imdbid === user2movie.imdbid){
+                         // Vi har funnet en film som user1 har i sin ønskeliste, og user2 har i sin favorittliste
+
+                        // Har user1 filmen i sin egen favorittliste også? hvis ikke...
+                        if(!user1Fav.favoriteMovies.some(movie => movie.imdbid === user1MovieWish.imdbid)) {
+                            // Har user2 filmen i sin ønskeliste også? Hvis ikke ...
+                            if(!user2Wish.wishlist.some(movie => movie.imdbid === user1MovieWish.imdbid)) {
+
+                                // Legger til filmen i user1 sin "min ønskeliste som er i andre bruker sin favorittliste"-liste
+                                user1WishMovieIDs.push(user1MovieWish)
+                                break
+                            } 
+                        }
+                    } 
                 }
             }
         }
 
-        if (user1Fav.favoriteMovies && user2Wish.wishlist ) {
-            for(const user1movieFav of user1Fav?.favoriteMovies){
-                for(const user2movieWish of user2Wish?.wishlist){           
-                    if(user1movieFav.imdbid === user2movieWish.imdbid){
-                        user1WishMovieIDs.push(user1movieFav)
+        // User 2 sin kolleksjon av "mitt ønske og andres favoritt"
+        if (user2Wish.wishlist && user1Fav.favoriteMovies) {
+            for(const user2MovieWish of user2Wish?.wishlist){
+                for(const user1MovieFav of user1Fav?.favoriteMovies){           
+                    if(user2MovieWish.imdbid === user1MovieFav.imdbid){
+                        // Vi har funnet en film som user2 har i sin ønskeliste, og user1 har i sin favorittliste
                         
-                        break
+                         // Har user2 filmen i sin egen favorittliste også? hvis ikke...
+                         if(!user2Fav.favoriteMovies.some(movie => movie.imdbid === user2MovieWish.imdbid)) {
+                            // Har user1 filmen i sin ønskeliste også? Hvis ikke ... 
+                            if(!user1Wish.wishlist.some(movie => movie.imdbid === user2MovieWish.imdbid)) {
+                                // Legger til filmen i user2 sin "min ønskeliste som er i andre bruker sin favorittliste"-liste
+                                user2WishMovieIDs.push(user2MovieWish)
+                                break
+                            }  
+                        }
                     }
                 }
             }
@@ -75,12 +94,12 @@ export default function CommonWishVsFav({user1, user2}) {
                 <ul>
                      <li> 
                         <h3>Din ønskeliste vs {user2} sine favoritter</h3>
-                    {moviesDataUser2WishVsUser1Fav?.map((movie, index) =>
+                    {moviesDataUser1WishVsUser2Fav?.map((movie, index) =>
                         <MovieCard key={index} movie={movie} className="mixedDash"/>
                     )}
                     </li>
                     <li> <h3>{user2} ønskeliste vs dine favoritter</h3>
-                     {moviesDataUser1WishVsUser2Fav?.map((movie, index)=>
+                     {moviesDataUser2WishVsUser1Fav?.map((movie, index)=>
                        
                     <MovieCard key={index} movie={movie} className="mixedDash"/>
                         
