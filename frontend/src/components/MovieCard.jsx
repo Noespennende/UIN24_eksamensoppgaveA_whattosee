@@ -20,8 +20,8 @@ export default function MovieCard({movie, className}) {
                     <img src={imdbImage?.url} alt={imdbImage?.caption}  width="300" height="420"></img>
                 </picture>
             </Link>
-            <Link to={`https://www.imdb.com/title/${movie.id}`}>
-                <h3>{movie.titleText.text}</h3>
+            <Link className="movieCardTitle" to={`https://www.imdb.com/title/${movie.id}`}>
+                {movie.titleText.text}
             </Link>
         </article>
         

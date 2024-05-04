@@ -55,12 +55,14 @@ export default function FrontPage({ onLogout, loggedInUser}) {
             <section id="skal_se">
                 <h2>Filmer jeg skal se!</h2>
                 <p>Disse filmene ligger i ønskelisten din:</p>
+                <ul id="frontpagefavmovie">
                 {apiData?.map((movie, index) => (
-                    <MovieCard key={index} movie={movie} className={"frontPageMc"} />))}
+                    <li key={"favmovie"+index}><MovieCard movie={movie} className={"frontPageMc"} /></li>))}
+                </ul>
             </section>
             <section id="se_med">
                 <h3>Jeg skal se sammen med...</h3>
-                <ul>
+                <ul id="frontpageFavorites">
                     {users.map((user, index) => ((user.username.toLowerCase() === loggedInUser) ? ("") : (
                         <li key={index}>
                             <Link to={`/Dashboard/${user.username}`}>{user.username}</Link>

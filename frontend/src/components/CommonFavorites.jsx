@@ -52,8 +52,10 @@ export default function CommonFavories({user1, user2}) {
                 ? (<p>Dere har {commonFavoriteMoviesData.length} filmer felles i favorittlisten deres.</p>) 
                 : <p>Dere har {commonFavoriteMoviesData.length} film felles i favorittlisten deres.</p>
                 }
-                {commonFavoriteMoviesData?.map((movie, index) => 
-                <MovieCard key={index} movie={movie} className="favoritesDash"/>)}
+                <ul id="gosafelist">
+                    {commonFavoriteMoviesData?.map((movie, index) => 
+                    <li key={"gosafe"+index}><MovieCard movie={movie} className="favoritesDash"/></li>)}
+                </ul>
             </section>
     )
 }

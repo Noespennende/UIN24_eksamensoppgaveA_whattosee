@@ -30,9 +30,9 @@ export default function Genre() {
 
 
     return (
-        <section>
+        <section id="genrepage">
             <h1>Sjanger: {slug?.charAt(0).toUpperCase() + slug?.slice(1)} ({movieList?.length} filmer)</h1>
-            <ul>
+            <ul id="movieingenreList">
                 {movieApiData?.map((movie, index) => <li key={"movie" + index}><MovieCard movie={movie} className="mcgenre"/></li>)}   
             </ul>
         </section>

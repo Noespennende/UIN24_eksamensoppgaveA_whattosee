@@ -55,8 +55,10 @@ export default function CommonWishes({user1, user2}) {
                 ? (<p>Dere har {commonWishlistMovieIDs.length} filmer felles i ønskelisten deres.</p>) 
                 : <p>Dere har {commonWishlistMovieIDs.length} film felles i ønskelisten deres.</p>
                 }
-                {commonWishlistMoviesData?.map((movie, index) => 
-                <MovieCard key={index} movie={movie} className="wishlistDash"/>)}
+                <ul id="catchupList">
+                        {commonWishlistMoviesData?.map((movie, index) =>
+                        <li key={"catchup"+index}><MovieCard movie={movie} className="wishlistDash"/></li>)}
+                </ul>
             </section>
     )
 }

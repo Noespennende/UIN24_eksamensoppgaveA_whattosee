@@ -12,6 +12,14 @@ body {
     max-width: 100%;
     width: 100%;
 
+    a {
+        text-decoration: none;
+
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+
     #root {
         padding: 0;
         margin: 0;
@@ -37,6 +45,7 @@ body {
                     padding-left: 0.5rem;
                     font-weight: bold;
                     font-size: x-large;
+                    text-decoration: none;
                 }
 
                 ul {
@@ -54,6 +63,11 @@ body {
 
                         a {
                             color: $colorWhite;
+                            text-decoration: none;
+
+                            &:hover{
+                                text-decoration: underline;
+                            }
                         }
                     }
                 }
@@ -90,7 +104,13 @@ body {
                     a {
                         max-width: 100%;
                         height: auto;
-
+                    }
+                    .movieCardTitle{
+                        font-size: 1.2rem;
+                        font-weight: 800;
+                        margin: 1rem 0 2rem 0;
+                        padding: 0;
+                         
                     }
                 }
             }
@@ -115,7 +135,6 @@ body {
                         a {
                             display: list-item;
                             margin-left: 1rem;
-                            text-decoration: none;
 
                         }
                     }
@@ -160,12 +179,16 @@ body {
                 ul {
                     display: flex;
                     flex-direction: column;
-                    //  align-self: flex-start;
 
                     li {
                         article {
-                            a {
-                                padding: 1rem;
+
+                            .movieCardTitle{
+                                font-size: 1.2rem;
+                                font-weight: 800;
+                                margin: 1rem 0 2rem 0;
+                                padding: 0;
+                                 
                             }
 
                             p {
@@ -195,6 +218,57 @@ body {
     }
 }
 
+/*Pc og tablet specific css*/
+@media only screen and (min-width: 800px){
+
+    body #root main section #frontpagefavmovie {
+        max-width: 1200px;
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    body #root main section #catchupList {
+        max-width: 1200px;
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    body #root main section #gosafelist {
+        max-width: 1200px;
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    body #root main section #wishvsfav1 {
+        max-width: 1200px;
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    body #root main section #wishvsfav2 {
+        max-width: 1200px;
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    body #root main section #movieingenreList {
+        max-width: 1200px;
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
 
 
 /// etter 400px i bredde blir nav bar elementene plassert under hverandre
