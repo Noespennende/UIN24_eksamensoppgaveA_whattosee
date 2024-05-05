@@ -24,7 +24,7 @@ body {
         padding: 0;
         margin: 0;
         max-width: 100%;
-        text-align: justify;
+        text-align: left;
 
         header {
             display: flex;
@@ -80,6 +80,7 @@ body {
             flex-direction: column;
             flex-wrap: wrap;
             align-items: center;
+            margin-bottom: 5rem;
 
             ul {
 
@@ -88,6 +89,31 @@ body {
 
                 }
             }
+
+            h1 {
+                margin-left: 2rem;
+                margin-right: 2rem;
+                text-align: left;
+            }
+
+            h2 {
+                text-align: left;
+                margin-left: 2rem;
+                margin-right: 2rem;
+            }
+
+            h3 {
+                text-align: left;
+                margin-left: 2rem;
+                margin-right: 2rem;
+            }
+
+            p {
+                margin-left: 2rem;
+                margin-right: 2rem;
+            }
+
+
 
             section#skal_se {
                 display: flex;
@@ -214,6 +240,21 @@ body {
                     padding: 0;
                 }
             }
+
+            #loginlist {
+                
+            }
+        }
+
+        footer {
+            background-color: $navcolor;
+            color: $colorWhite;
+            text-align: center;
+            margin-bottom: 0;
+            p {
+                padding: 2rem 0rem;
+                margin-bottom: 0;
+            }
         }
     }
 }
@@ -268,6 +309,19 @@ body {
         flex-wrap: wrap;
         justify-content: center;
     }
+}
+
+/*Menypunkter på veldig små skjermer*/
+@media only screen and (max-width: 675px){
+
+    header nav {
+        justify-content: space-between;
+
+        ul {
+            flex-direction: column;
+        }
+    }
+
 }
 
 

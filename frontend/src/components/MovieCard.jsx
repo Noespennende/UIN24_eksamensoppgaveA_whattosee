@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useEffect} from "react";
-import { apiClient } from "../../imdbapi/apiClient";
 
 export default function MovieCard({movie, className}) {
 

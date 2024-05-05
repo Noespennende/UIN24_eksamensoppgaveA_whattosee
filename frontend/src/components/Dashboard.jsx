@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
 import CommonWishes from "./CommonWishes";
 import CommonFavories from "./CommonFavorites";
 import CommonGenres from "./CommonGenres";

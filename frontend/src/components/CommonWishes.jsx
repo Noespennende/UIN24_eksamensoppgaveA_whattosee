@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { getMoviesData } from "../../imdbapi/apiServices"
 import { fetchWishlistMoviesByUser } from "../../sanity/services/userServices"
-import DashMovieCard from "./DashMovieCard"
 import MovieCard from "./MovieCard"
 
 export default function CommonWishes({user1, user2}) {

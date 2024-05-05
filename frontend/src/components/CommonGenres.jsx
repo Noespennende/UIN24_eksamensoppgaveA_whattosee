@@ -10,9 +10,6 @@ export default function CommonGenres({user1, user2}) {
     const getCommonFavoriteGenresByUsers = async (user1, user2) => {
         const user1FavoriteGenres = (await fetchFavoriteGenresByUser(user1))
         const user2FavoriteGenres = (await fetchFavoriteGenresByUser(user2))
-        
-
-        console.log("user1 ", user1FavoriteGenres)
         const commonFavoriteGenres = []
 
         if (user1FavoriteGenres && user2FavoriteGenres) {

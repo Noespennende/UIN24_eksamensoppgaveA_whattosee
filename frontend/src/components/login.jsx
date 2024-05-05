@@ -26,7 +26,7 @@ export default function Loginpage({ onLogin }) {
         <>
             <h1>Hvem skal se idag?</h1>
             <h2>Velg bruker</h2>
-            <ul>
+            <ul id="loginlist">
                 {users.map((user, index) => (
                     <li key={"brukere"+index}><Link to={`/Frontpage/${user.username}`}><button onClick={() => handleLogin(user.username)}>{user.username}</button></Link></li>
                 ))}

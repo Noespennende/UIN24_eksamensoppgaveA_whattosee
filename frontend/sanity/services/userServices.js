@@ -47,7 +47,6 @@ export async function addFavoriteGenreToUser(userId, genreId) {
         .commit({ autoGenerateArrayKeys: true })
         .then(() => { return "sucess" })
         .catch((error) => { return "Error: " + error.message })
-    console.log("add result:" + result)
     return result
 }
 
@@ -58,7 +57,6 @@ export async function removeFavoriteGenreromUser(userId, genreId) {
         .commit()
         .then(() => { return "sucess" })
         .catch((error) => { return "Error: " + error.message })
-    console.log("remove result:" + result)
     return result
 }
 

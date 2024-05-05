@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import NavBar from "./NavBar";
+import Footer from "./footer";
 
 export default function Layout({children, setLoggedIn, loggedInUser, setLoggedInUser}) {
 
@@ -12,6 +12,9 @@ export default function Layout({children, setLoggedIn, loggedInUser, setLoggedIn
         <main>
             {children}
         </main>
+        <footer>
+            <Footer loggedInUser={loggedInUser}/>
+        </footer>
         </>
     )
 }
