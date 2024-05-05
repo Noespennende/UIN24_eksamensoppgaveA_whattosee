@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { RxStar } from "react-icons/rx";
 import { RxStarFilled } from "react-icons/rx";
 import { addFavoriteGenreToUser, removeFavoriteGenreromUser } from "../../sanity/services/userServices";
-import { useEffect, useState } from "react";
 
 export default function GenreCard({title, genreId, url, userGenres, userId, index, setChange}){
 

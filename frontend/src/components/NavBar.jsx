@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
 import "../styles.css"
-import { useState } from "react";
 
 export default function NavBar({LoggedInUser, setLoggedInUser, setLoggedInn}){
 

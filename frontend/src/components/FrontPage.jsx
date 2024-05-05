@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom'
 import { fetchUsers } from '../../sanity/services/loginServices'
 import { fetchWishlistMoviesByUser } from "../../sanity/services/userServices"
 import MovieCard from './MovieCard'
-import { apiClient } from "../../imdbapi/apiClient"
 import { getMoviesData } from "../../imdbapi/apiServices"
 
 

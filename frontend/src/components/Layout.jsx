@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 
 export default function Layout({children, setLoggedIn, loggedInUser, setLoggedInUser}) {
