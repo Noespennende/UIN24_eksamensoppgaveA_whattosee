@@ -90,7 +90,6 @@ export default function CommonWishVsFav({user1, user2}) {
     return (
         <section>
                 <h2>Ønskeliste vs Favoritter</h2>
-                <p>sjekk ut dette</p>
                 <section>
                     <h3>Din ønskeliste vs {user2} sine favoritter</h3>
                     <ul id="wishvsfav1">
