@@ -1,5 +1,5 @@
 import NavBar from "./NavBar";
-import Footer from "./footer";
+import Footer from "./Footer";
 
 export default function Layout({children, setLoggedIn, loggedInUser, setLoggedInUser}) {
 

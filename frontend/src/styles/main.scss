@@ -240,10 +240,6 @@ body {
                     padding: 0;
                 }
             }
-
-            #loginlist {
-                
-            }
         }
 
         footer {
@@ -251,9 +247,18 @@ body {
             color: $colorWhite;
             text-align: center;
             margin-bottom: 0;
-            p {
+            ul {
+                display: flex;
+                flex-direction: column;
                 padding: 2.5rem 0rem;
                 margin-bottom: 0;
+                li {
+                    margin: .5rem;
+
+                    a{
+                        color: $colorWhite;
+                    }
+                }
             }
         }
     }
