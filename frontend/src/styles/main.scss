@@ -1,7 +1,10 @@
-$navcolor: #21243e;
-$colorWhite: #ffff;
-$colorGrey: #dbdbdb;
 
+@import 'variables';
+@import 'headernav';
+@import 'frontpage';
+@import 'dashboard';
+@import 'genrepage';
+@import 'footer';
 
 body {
     display: flex;
@@ -15,7 +18,7 @@ body {
     a {
         text-decoration: none;
 
-        &:hover{
+        &:hover {
             text-decoration: underline;
         }
     }
@@ -25,54 +28,6 @@ body {
         margin: 0;
         max-width: 100%;
         text-align: left;
-
-        header {
-            display: flex;
-            flex-wrap: wrap;
-            background-color: $navcolor;
-            width: 100%;
-            margin: 0rem 1rem 0rem 0rem;
-
-            nav {
-                display: flex;
-                gap: 1rem;
-                width: 100%;
-                margin: 1.5rem;
-                padding: 0.5rem 0.5rem 0.5rem 0rem;
-
-                #logo {
-                    color: $colorWhite;
-                    padding-left: 0.5rem;
-                    font-weight: bold;
-                    font-size: x-large;
-                    text-decoration: none;
-                }
-
-                ul {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 1rem;
-
-                    li {
-
-                        p {
-                            color: $colorWhite;
-                            margin: 0;
-
-                        }
-
-                        a {
-                            color: $colorWhite;
-                            text-decoration: none;
-
-                            &:hover{
-                                text-decoration: underline;
-                            }
-                        }
-                    }
-                }
-            }
-        }
 
         main {
             padding-top: 5rem;
@@ -86,7 +41,6 @@ body {
 
                 li {
                     padding: 0.5rem;
-
                 }
             }
 
@@ -113,221 +67,11 @@ body {
                 margin-right: 2rem;
             }
 
-
-
-            section#skal_se {
-                display: flex;
-                flex-direction: column;
-                gap: 1.5rem;
-                align-self: center;
-                flex-wrap: wrap;
-
-                article.frontPageMc {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-
-                    a {
-                        max-width: 100%;
-                        height: auto;
-                    }
-                    .movieCardTitle{
-                        font-size: 1.2rem;
-                        font-weight: 800;
-                        margin: 1rem 0 2rem 0;
-                        padding: 0;
-                         
-                    }
-                }
-            }
-
-            section#se_med {
-                margin: 1rem;
-                padding: 1rem;
-                width: fit-content;
-                align-self: center;
-                background-color: $colorGrey;
-                border-radius: 5px;
-                flex-wrap: wrap;
-
-
-                ul {
-
-                    li {
-                        padding: 0.5rem;
-                        display: flex;
-                        list-style-type: disc;
-
-                        a {
-                            display: list-item;
-                            margin-left: 1rem;
-
-                        }
-                    }
-                }
-            }
-
             section {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-
-                article.wishlistDash {
-                    max-width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    height: auto;
-                    align-items: center;
-
-                }
-
-                article.favoritesDash {
-                    max-width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    height: auto;
-                    align-items: center;
-
-                }
-
-                article.mixedDash {
-                    max-width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    height: auto;
-                    align-items: center;
-
-                    a {
-                        padding: 0;
-                    }
-                }
-
-                ul {
-                    display: flex;
-                    flex-direction: column;
-
-                    li {
-                        article {
-
-                            .movieCardTitle{
-                                font-size: 1.2rem;
-                                font-weight: 800;
-                                margin: 1rem 0 2rem 0;
-                                padding: 0;
-                                 
-                            }
-
-                            p {
-                                display: contents;
-
-                            }
-                        }
-
-
-                    }
-                }
             }
-
-            article.mcgenre {
-                display: flex;
-                flex-direction: column;
-                flex-wrap: wrap;
-                max-width: 100%;
-                height: auto;
-                align-items: center;
-
-                a {
-                    padding: 0;
-                }
-            }
-        }
-
-        footer {
-            background-color: $navcolor;
-            color: $colorWhite;
-            text-align: center;
-            margin-bottom: 0;
-            ul {
-                display: flex;
-                flex-direction: column;
-                padding: 2.5rem 0rem;
-                margin-bottom: 0;
-                li {
-                    margin: .5rem;
-
-                    a{
-                        color: $colorWhite;
-                    }
-                }
-            }
-        }
+        }  
     }
 }
-
-/*Pc og tablet specific css*/
-@media only screen and (min-width: 800px){
-
-    body #root main section #frontpagefavmovie {
-        max-width: 1200px;
-        display:flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    body #root main section #catchupList {
-        max-width: 1200px;
-        display:flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    body #root main section #gosafelist {
-        max-width: 1200px;
-        display:flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    body #root main section #wishvsfav1 {
-        max-width: 1200px;
-        display:flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    body #root main section #wishvsfav2 {
-        max-width: 1200px;
-        display:flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    body #root main section #movieingenreList {
-        max-width: 1200px;
-        display:flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-}
-
-/*Menypunkter på veldig små skjermer*/
-@media only screen and (max-width: 675px){
-
-    header nav {
-        justify-content: space-between;
-
-        ul {
-            flex-direction: column;
-        }
-    }
-
-}
-
-
-/// etter 400px i bredde blir nav bar elementene plassert under hverandre

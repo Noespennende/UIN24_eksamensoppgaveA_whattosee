@@ -1,0 +1,66 @@
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: $navcolor;
+    width: 100%;
+    margin: 0rem 1rem 0rem 0rem;
+    
+    nav {
+        display: flex;
+        gap: 1rem;
+        width: 100%;
+        margin: 1.5rem;
+        padding: 0.5rem 0.5rem 0.5rem 0rem;
+
+        #logo {
+            color: $colorWhite;
+            padding-left: 0.5rem;
+            font-weight: bold;
+            font-size: x-large;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+
+            li {
+
+                p {
+                    color: $colorWhite;
+                    margin: 0;
+
+                }
+
+                a {
+                    color: $colorWhite;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*Pc og tablet specific css*/
+/*Menypunkter på veldig små skjermer*/
+@media only screen and (max-width: 675px) {
+
+    header nav {
+        justify-content: space-between;
+
+        ul {
+            flex-direction: column;
+        }
+    }
+}
+/// etter 400px i bredde blir nav bar elementene plassert under hverandre

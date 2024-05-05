@@ -1,0 +1,21 @@
+footer {
+    background-color: $navcolor;
+    color: $colorWhite;
+    text-align: center;
+    margin-bottom: 0;
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        padding: 2.5rem 0rem;
+        margin-bottom: 0;
+        
+        li {
+            margin: .5rem;
+
+            a {
+                color: $colorWhite;
+            }
+        }
+    }
+}
