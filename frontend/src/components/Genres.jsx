@@ -31,7 +31,7 @@ export default function Genres(){
     },[changeHappened])
 
     return(
-        <section>
+        <section className="genrespage">
             <h1>Sjangere</h1>
             <ul>
                 {genreList?.map((genre, index) => <li key={"genre"+index}><GenreCard title={genre.genretitle} genreId={genre.id} url={genre.url} setChange={setChangeHappened} userGenres={(userGenres) ? (userGenres) : ([])} userId={userId} index={index}/></li>)}

@@ -8,6 +8,8 @@ header {
     
     nav {
         display: flex;
+        justify-content: space-between; 
+        align-items: center;
         gap: 1rem;
         width: 100%;
         margin: 1.5rem;
@@ -28,9 +30,15 @@ header {
         ul {
             display: flex;
             flex-wrap: wrap;
+            list-style: none;
+            margin: 0;
+            padding: 0;
             gap: 1rem;
 
             li {
+                display: inline-block;
+                list-style-type: none;
+                margin-right: 10px;
 
                 p {
                     color: $colorWhite;

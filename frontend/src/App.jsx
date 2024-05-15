@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
 import Loginpage from './components/login'
-import './App.css'
 import FrontPage from './components/FrontPage'
 import Dashboard from './components/Dashboard'
 import { useEffect, useState } from 'react'

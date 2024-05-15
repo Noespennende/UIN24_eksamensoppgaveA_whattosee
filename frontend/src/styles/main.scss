@@ -1,12 +1,17 @@
 
+
 @import 'variables';
 @import 'headernav';
+@import 'login';
 @import 'frontpage';
+@import 'genrespage';
 @import 'dashboard';
 @import 'genrepage';
 @import 'footer';
 
+
 body {
+    font-family: $font;
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -39,7 +44,10 @@ body {
 
             ul {
 
+                padding-left: 0;
+
                 li {
+                    list-style-type: none;
                     padding: 0.5rem;
                 }
             }
