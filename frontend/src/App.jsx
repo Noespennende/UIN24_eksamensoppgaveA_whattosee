@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import Loginpage from './components/login'
+import Loginpage from './components/Test'
 import FrontPage from './components/FrontPage'
 import Dashboard from './components/Dashboard'
 import { useEffect, useState } from 'react'
