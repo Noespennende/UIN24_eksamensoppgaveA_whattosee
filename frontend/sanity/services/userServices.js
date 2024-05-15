@@ -30,16 +30,6 @@ export async function fetchFavoriteGenresByUser(username) {
 }
 
 
-// Kommentert ut gammel fetchFavoriteGenresByUser -> I tilfellet det ikke funker helt enda
-/*
-export async function fetchFavoriteGenresByUser(username) {
-    const data = await client.fetch(`*[_type == "users" && username == $username]{
-        "favorites": favoriteGenres[]->genretitle
-    }`, { username: username })
-    return data
-}
-*/
-
 export async function addFavoriteGenreToUser(userId, genreId) {
     const result = await writeClient
         .patch(userId).setIfMissing({ favoriteGenres: [] })
@@ -67,10 +57,3 @@ export async function fetchUserId(userName) {
 
     return data
 }
-
-
-/*
-export async function fetchCommonWishlistMoviesForUsers(user1Wishlist, user2Wishlist){
-    // prøver fortsatt slå sammen spørringer .. 🤓
-}
-*/
